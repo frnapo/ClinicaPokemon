@@ -19,6 +19,12 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @if(User.IsInRole("Veterinario"))
+                    {
+                    <li>@Html.ActionLink("Gestione Pokémon", "Index", "Animali", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Registrati", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>

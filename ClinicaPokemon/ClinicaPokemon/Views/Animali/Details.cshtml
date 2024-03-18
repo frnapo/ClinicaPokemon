@@ -1,0 +1,74 @@
+﻿@model ClinicaPokemon.Models.Animali
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Animali</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Utenti.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utenti.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipologia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipologia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Colore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNascita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataNascita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Microchip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Microchip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NrMicro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NrMicro)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idAnimale }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

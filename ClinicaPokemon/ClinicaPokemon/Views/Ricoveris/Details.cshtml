@@ -1,0 +1,58 @@
+﻿@model ClinicaPokemon.Models.Ricoveri
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ricoveri</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Animali.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Animali.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInizioRicovero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataInizioRicovero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FotoAnimale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FotoAnimale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrezzoRicovero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrezzoRicovero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Attivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attivo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idRicovero }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

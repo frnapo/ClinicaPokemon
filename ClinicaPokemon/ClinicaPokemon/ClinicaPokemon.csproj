@@ -142,7 +142,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AnimaliController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RicoverisController.cs" />
+    <Compile Include="Controllers\VisiteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +216,21 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Animali\Create.cshtml" />
+    <Content Include="Views\Animali\Delete.cshtml" />
+    <Content Include="Views\Animali\Details.cshtml" />
+    <Content Include="Views\Animali\Edit.cshtml" />
+    <Content Include="Views\Animali\Index.cshtml" />
+    <Content Include="Views\Visite\Create.cshtml" />
+    <Content Include="Views\Visite\Delete.cshtml" />
+    <Content Include="Views\Visite\Details.cshtml" />
+    <Content Include="Views\Visite\Edit.cshtml" />
+    <Content Include="Views\Visite\Index.cshtml" />
+    <Content Include="Views\Ricoveris\Create.cshtml" />
+    <Content Include="Views\Ricoveris\Delete.cshtml" />
+    <Content Include="Views\Ricoveris\Details.cshtml" />
+    <Content Include="Views\Ricoveris\Edit.cshtml" />
+    <Content Include="Views\Ricoveris\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
