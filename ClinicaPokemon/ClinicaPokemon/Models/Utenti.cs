@@ -1,10 +1,8 @@
 namespace ClinicaPokemon.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Utenti")]
     public partial class Utenti
@@ -25,7 +23,7 @@ namespace ClinicaPokemon.Models
         [Required]
         public string Psw { get; set; }
 
-        public short Ruolo { get; set; }
+        public short Ruolo { get; set; } = 1;
 
         public string Nome { get; set; }
 
