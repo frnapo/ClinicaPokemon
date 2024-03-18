@@ -36,7 +36,11 @@ namespace ClinicaPokemon.Controllers
         // GET: Animali/Create
         public ActionResult Create()
         {
-            ViewBag.FK_idUtente = new SelectList(db.Utenti, "idUtente", "Username");
+            ViewBag.FK_idUtente = new SelectList(db.Utenti.Select(u => new
+            {
+                idUtente = u.idUtente,
+                NomeCompleto = u.Cognome + " " + u.Nome
+            }), "idUtente", "NomeCompleto");
             return View();
         }
 
@@ -54,7 +58,12 @@ namespace ClinicaPokemon.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FK_idUtente = new SelectList(db.Utenti, "idUtente", "Username", animali.FK_idUtente);
+            ViewBag.FK_idUtente = new SelectList(db.Utenti.Select(u => new
+            {
+                idUtente = u.idUtente,
+                NomeCompleto = u.Cognome + " " + u.Nome
+            }), "idUtente", "NomeCompleto", animali.FK_idUtente);
+
             return View(animali);
         }
 

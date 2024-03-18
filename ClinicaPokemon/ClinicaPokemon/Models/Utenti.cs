@@ -21,6 +21,7 @@ namespace ClinicaPokemon.Models
         public string Username { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         public string Psw { get; set; }
 
         public short Ruolo { get; set; } = 1;

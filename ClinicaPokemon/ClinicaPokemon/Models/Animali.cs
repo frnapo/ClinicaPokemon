@@ -4,7 +4,6 @@ namespace ClinicaPokemon.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Animali")]
     public partial class Animali
@@ -29,6 +28,7 @@ namespace ClinicaPokemon.Models
         public string Colore { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime DataNascita { get; set; }
 
         public bool Microchip { get; set; }
