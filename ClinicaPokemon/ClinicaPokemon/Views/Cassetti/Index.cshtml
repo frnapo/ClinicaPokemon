@@ -4,37 +4,32 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
+    body{
+        background-color: #002171;
+    }
+    .card {
+        background-color: #002171;
+    }
+</style>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Armadietti.idArmadietto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroCassetto)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <div class="row ">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 ">
+                <div class="card border-white my-3">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Numero Cassetto: @Html.DisplayFor(modelItem => item.NumeroCassetto)</h5>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Armadietti.idArmadietto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroCassetto)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idCassetto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idCassetto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idCassetto }) |
-            @Html.ActionLink("Prodotti", "Index", "Prodotti", new { id=item.idCassetto }, null)
-        </td>
-    </tr>
-}
+                        @*<a href="@Url.Action("Edit", "YourController", new { id=item.idCassetto })" class="card-link">Modifica</a>
+                            <a href="@Url.Action("Details", "YourController", new { id=item.idCassetto })" class="card-link">Dettagli</a>
+                            <a href="@Url.Action("Delete", "YourController", new { id=item.idCassetto })" class="card-link">Elimina</a>*@
+                        <a href="@Url.Action("Index", "Prodotti", new { id=item.idCassetto })" class="btn btn-dark text-white">Visualizza Prodotti Presenti</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-</table>

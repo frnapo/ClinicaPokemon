@@ -4,32 +4,36 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
+    body {
+        background-color: #002171;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroArmadietto)
-        </th>
-        <th></th>
-    </tr>
+    .custom-card {
+        background-color: #002171;
+    } 
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroArmadietto)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.idArmadietto }) |
-            @Html.ActionLink("Details", "Details", new { id = item.idArmadietto }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.idArmadietto }) |
-            @Html.ActionLink("Visualizza cassetti", "Index", "Cassetti", new { FK_idArmadietto = item.idArmadietto }, null)
+</style>
 
-        </td>
-    </tr>
-}
 
-</table>
+
+<div class="container ">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="card my-3 border-white custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Armadietto Numero: @Html.DisplayFor(modelItem => item.NumeroArmadietto)</h5>
+                        <p class="card-text">
+
+                        </p>
+                        <a href="@Url.Action("Index", "Cassetti", new { FK_idArmadietto = item.idArmadietto })" class="btn btn-dark text-white">Prosegui su Cassetti</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
