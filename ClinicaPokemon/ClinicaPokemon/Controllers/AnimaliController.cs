@@ -49,7 +49,7 @@ namespace ClinicaPokemon.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente")] Animali animali)
+        public ActionResult Create([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione")] Animali animali)
         {
             if (ModelState.IsValid)
             {

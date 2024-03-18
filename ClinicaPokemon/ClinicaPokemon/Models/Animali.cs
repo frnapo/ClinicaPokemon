@@ -18,6 +18,8 @@ namespace ClinicaPokemon.Models
         [Key]
         public int idAnimale { get; set; }
 
+        public DateTime? DataRegistrazione { get; set; } = DateTime.Now;
+
         [Required]
         public string Nome { get; set; }
 
