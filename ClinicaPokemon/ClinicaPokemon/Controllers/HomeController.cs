@@ -21,6 +21,7 @@ namespace ClinicaPokemon.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(Utenti utente)
         {
             using (var context = new ClinicaDbContext())
@@ -66,30 +67,34 @@ namespace ClinicaPokemon.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(Utenti utente)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string username, string psw)
         {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(psw))
+            {
+                TempData["LoginFallito"] = "Username o Password non fornita";
+                return View();
+            }
+
             using (var context = new ClinicaDbContext())
             {
-                var existingUser = context.Utenti.FirstOrDefault(u => u.Username == utente.Username);
-                if (existingUser == null)
+                var existingUser = context.Utenti.FirstOrDefault(u => u.Username == username);
+                if (existingUser != null && existingUser.Psw != null && VerifyPassword(psw, existingUser.Psw))
                 {
-                    TempData["LoginFallito"] = "Utente non registrato";
-                    return View();
-                }
-
-                if (VerifyPassword(utente.Psw, existingUser.Psw))
-                {
-                    FormsAuthentication.SetAuthCookie(utente.Username, false);
+                    FormsAuthentication.SetAuthCookie(username, false);
                     TempData["LoginRiuscito"] = "Login avvenuto con successo";
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    TempData["LoginFallito"] = "Password errata";
+                    TempData["LoginFallito"] = "Username o Password errata";
                     return View();
                 }
             }
         }
+
+
+
 
         public bool VerifyPassword(string enteredPassword, string savedPasswordHash)
         {

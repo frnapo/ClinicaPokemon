@@ -154,6 +154,7 @@
     <Compile Include="Models\DittaFornitrice.cs" />
     <Compile Include="Models\Prodotti.cs" />
     <Compile Include="Models\Ricoveri.cs" />
+    <Compile Include="Models\SiteRole.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\UsoProdotti.cs" />
     <Compile Include="Models\Utenti.cs" />
