@@ -1,10 +1,8 @@
 namespace ClinicaPokemon.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Ricoveri")]
     public partial class Ricoveri
@@ -14,6 +12,7 @@ namespace ClinicaPokemon.Models
 
         public int FK_idAnimale { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DataInizioRicovero { get; set; }
 
         [Required]

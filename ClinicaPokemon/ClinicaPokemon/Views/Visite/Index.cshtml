@@ -2,12 +2,16 @@
 
 @{
     ViewBag.Title = "Index";
+    var idAnimale = Request.QueryString["idAnimale"];
 }
 
-<h2>Index</h2>
+<h2>Visite precedenti</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Indietro", "Index", "Animali", new { idAnimale = idAnimale }, null)
+</p>
+<p>
+    @Html.ActionLink("Nuova visita", "Create", "Visite", new { idAnimale = idAnimale }, null)
 </p>
 <table class="table">
     <tr>

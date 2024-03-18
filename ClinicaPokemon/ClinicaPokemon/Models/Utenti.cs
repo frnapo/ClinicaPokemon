@@ -18,19 +18,25 @@ namespace ClinicaPokemon.Models
         public int idUtente { get; set; }
 
         [Required]
+        [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Psw { get; set; }
 
         public short Ruolo { get; set; } = 1;
 
+        [Required]
         public string Nome { get; set; }
 
+        [Required]
         public string Cognome { get; set; }
 
+        [Required]
         [StringLength(16)]
+        [Display(Name = "Codice Fiscale")]
         public string CodFiscale { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

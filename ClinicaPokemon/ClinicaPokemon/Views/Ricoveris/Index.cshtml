@@ -4,11 +4,18 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Ricoveri</h2>
 
+<p>
+    @Html.ActionLink("Indietro", "Index", "Animali")
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<p>
+    @Html.ActionLink("Ricoveri Rimborsabili", "GetRicoveriAttivi", new { }, new { @class = "btn btn-success rounded-1 my-2", style = "width: auto;", @onclick = "activeRicoveri(); return false;" }))
+</p>
+<p id="ricoveriData"></p>
 <table class="table">
     <tr>
         <th>
@@ -48,10 +55,32 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.idRicovero }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idRicovero }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.idRicovero })
         </td>
     </tr>
 }
 
 </table>
+
+<script>
+    function activeRicoveri() {
+        $.ajax({
+            url: '@Url.Action("GetRicoveriAttivi", "Ricoveris")',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                var html = '';
+                for(var i = 0; i < data.length; i++) {
+                    html += '<p>' + data[i].Animali.Nome + ' - ' + data[i].DataInizioRicovero + ' - ' + data[i].FotoAnimale + ' - ' + data[i].PrezzoRicovero + ' - ' + data[i].Attivo + '</p>';
+                }
+                $('#ricoveriData').html(html);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+     }
+    $(document).ready(function() {
+        activeRicoveri();
+    });
+</script>

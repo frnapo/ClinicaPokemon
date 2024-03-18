@@ -1,53 +1,72 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Applicazione ASP.NET</title>
+    <title>Pokémon Center</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Content/assets/img/16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/assets/img/32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="~/Content/assets/img/48x48.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Nome dell'applicazione", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav ms-auto d-flex align-items-center">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+    <nav class="navbar navbar-expand navbar-dark shadow" id="@(ViewContext.RouteData.Values["controller"] + "-navbar")">
 
-                    @if(User.IsInRole("Veterinario"))
-                    {
-                    <li>@Html.ActionLink("Gestione Pokémon", "Index", "Animali", new { area = "" }, new { @class = "nav-link" })</li>
-                    }
-
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Registrati", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    }
+        <div class="container d-flex justify-content-between">
+            <div>
+                <ul class="navbar-nav">
+                    <li class="">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
+                    <li class="">@Html.ActionLink("Ricerca", "Index", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white" })</li>
                 </ul>
+            </div>
+
+            <div class="mx-auto">
+                <img src="~/Content/assets/img/logo.png" class="ms-3" alt="logo" width="200" />
+            </div>
+
+            <div>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+                        @if (User.IsInRole("Veterinario"))
+                        {
+                            <li>@Html.ActionLink("Pokédex", "Index", "Animali", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
+                        }
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Registrati", "Register", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
+                            <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white" })</li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET</p>
-        </footer>
     </div>
+
+    <footer id="@(ViewContext.RouteData.Values["controller"] + "-footer")">
+        <p class="p-5 pb-0 text-center text-white m-0">PokémonCenter - Tutti i diritti riservati</p>
+        <p class="pb-5 text-center text-white m-0">© 2024 - TeamRocket Epicode</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>

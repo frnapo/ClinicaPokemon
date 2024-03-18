@@ -1,23 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ClinicaPokemon.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ClinicaPokemon.Models;
 
 namespace ClinicaPokemon.Controllers
 {
+    [Authorize(Roles = "Veterinario")]
     public class VisiteController : Controller
     {
         private ClinicaDbContext db = new ClinicaDbContext();
 
         // GET: Visite
-        public ActionResult Index()
+        public ActionResult Index(int? idAnimale)
         {
             var visite = db.Visite.Include(v => v.Animali);
+
+            if (idAnimale.HasValue)
+            {
+                visite = visite.Where(v => v.FK_idAnimale == idAnimale.Value);
+            }
+            visite = visite.OrderByDescending(v => v.DataVisita);
+
             return View(visite.ToList());
         }
 
@@ -37,9 +41,16 @@ namespace ClinicaPokemon.Controllers
         }
 
         // GET: Visite/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idAnimale)
         {
-            ViewBag.FK_idAnimale = new SelectList(db.Animali, "idAnimale", "Nome");
+            if (idAnimale.HasValue)
+            {
+                ViewBag.FK_idAnimale = new SelectList(db.Animali, "idAnimale", "Nome", idAnimale.Value);
+            }
+            else
+            {
+                ViewBag.FK_idAnimale = new SelectList(db.Animali, "idAnimale", "Nome");
+            }
             return View();
         }
 

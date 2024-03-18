@@ -1,20 +1,142 @@
-﻿/* Set padding to keep content from hitting the edges */
-.body-content {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+body {
+    font-family: 'Bai Jamjuree', sans-serif;
+    background: url('/Content/assets/img/second-bg.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden; /* da cambiare */
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.nav-link {
+    font-family: 'Bai Jamjuree', sans-serif;
+    color: white;
+    font-weight: bold;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+.toast {
+    margin-top: 110px !important;
+}
+
+
+.nav-link:hover {
+    color: black;
+    background-color: aliceblue !important;
+}
+
+input, select, textarea {
     max-width: 280px;
+}
+
+#heading {
+    filter: drop-shadow(1px, 2px, 1px, black);
+}
+
+#title {
+    color: white;
+    position: absolute;
+    font-family: "Bai Jamjuree", sans-serif;
+    font-weight: 700 !important;
+    font-style: italic;
+    top: 45%;
+    left: 50%;
+    right: -10%;
+    transform: translate(-80%, -50%);
+}
+
+
+#bg-home {
+    background: url('/Content/assets/img/bg-home.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    margin-top: -192px;
+}
+
+#background {
+    background: url('/Content/assets/img/background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    height: 89vh;
+    padding-top: 1px;
+    position: relative;
+}
+
+
+#Home-footer {
+    background-color: #002171;
+    letter-spacing: 2px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#Animali-footer, #Ricoveris-footer, #Visite-footer {
+    background-color: #AE222B;
+    letter-spacing: 2px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#Home-navbar {
+    background-color: #002171;
+}
+
+#Animali-navbar, #Ricoveris-navbar, #Visite-navbar {
+    background-color: #AE222B;
+}
+
+#pokedex {
+    background: url('/Content/assets/img/pokedex.png') no-repeat center center;
+    background-size: contain;
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; 
+    height: 600px;
+}
+
+
+#carouselExample {
+    position: absolute;
+    top: 74%; 
+    left: 85%; 
+    transform: translate(-50%, -50%); 
+    width: 800px;
+    height: 600px;
+    overflow: visible !important;
+}
+
+.carousel-item img {
+    width: 250px !important;
+    height: auto;
+}
+
+.carousel-control-prev {
+    top: 360px;
+    left: 205px;
+    z-index: 10;
+    width: 30px;
+    height: 20px;
+}
+
+.carousel-control-next {
+    top: 360px;
+    right: 530px;
+    z-index: 10;
+    width: 30px;
+    height: 20px;
+}
+
+.pkm-description {
+    font-family: 'Share Tech Mono', sans-serif;
+    position: fixed;
+    top: 44.5%;
+    left: -2.8%;
+    color: white;
+    margin-top: 50px;
+    line-height: 15.5px;
+    color: #4CAF50;
 }

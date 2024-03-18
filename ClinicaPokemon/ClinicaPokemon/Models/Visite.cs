@@ -1,10 +1,8 @@
 namespace ClinicaPokemon.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Visite")]
     public partial class Visite
@@ -12,6 +10,7 @@ namespace ClinicaPokemon.Models
         [Key]
         public int idVisita { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DataVisita { get; set; }
 
         [Required]

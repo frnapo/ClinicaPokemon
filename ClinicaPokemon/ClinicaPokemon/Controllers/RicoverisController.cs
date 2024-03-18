@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ClinicaPokemon.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using ClinicaPokemon.Models;
 
 namespace ClinicaPokemon.Controllers
 {
@@ -21,20 +18,6 @@ namespace ClinicaPokemon.Controllers
             return View(ricoveri.ToList());
         }
 
-        // GET: Ricoveris/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ricoveri ricoveri = db.Ricoveri.Find(id);
-            if (ricoveri == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ricoveri);
-        }
 
         // GET: Ricoveris/Create
         public ActionResult Create()
@@ -94,31 +77,6 @@ namespace ClinicaPokemon.Controllers
             return View(ricoveri);
         }
 
-        // GET: Ricoveris/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ricoveri ricoveri = db.Ricoveri.Find(id);
-            if (ricoveri == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ricoveri);
-        }
-
-        // POST: Ricoveris/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Ricoveri ricoveri = db.Ricoveri.Find(id);
-            db.Ricoveri.Remove(ricoveri);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -127,6 +85,34 @@ namespace ClinicaPokemon.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public async Task<ActionResult> GetRicoveriAttivi()
+        {
+            var ricoveri = await db.Ricoveri.Include(r => r.Animali).Where(r => r.Attivo == true).ToListAsync();
+            var result = ricoveri.Select(r => new
+            {
+                idRicovero = r.idRicovero,
+                FK_idAnimale = r.FK_idAnimale,
+                DataInizioRicovero = r.DataInizioRicovero,
+                FotoAnimale = r.FotoAnimale,
+                PrezzoRicovero = r.PrezzoRicovero,
+                Attivo = r.Attivo,
+                NomeAnimale = r.Animali.Nome
+            });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SetRicoveriNonAttivi()
+        {
+            var ricoveri = db.Ricoveri.Include(r => r.Animali).Where(r => r.Attivo == true);
+            foreach (var ricovero in ricoveri)
+            {
+                ricovero.Attivo = false;
+                db.Entry(ricovero).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
