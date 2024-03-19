@@ -68,7 +68,7 @@ namespace ClinicaPokemon.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProdotto,NomeProdotto,Tipo,FK_idUsoProdotto,FK_idDittaFornitrice,FK_idCassetto,FK_idArmadietto")] Prodotti prodotti)
+        public ActionResult Create([Bind(Include = "idProdotto,NomeProdotto,Tipo,FK_idUsoProdotto,FK_idDittaFornitrice,FK_idCassetto,FK_idArmadietto, Immagine")] Prodotti prodotti)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace ClinicaPokemon.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProdotto,NomeProdotto,Tipo,FK_idUsoProdotto,FK_idDittaFornitrice,FK_idCassetto,FK_idArmadietto")] Prodotti prodotti)
+        public ActionResult Edit([Bind(Include = "idProdotto,NomeProdotto,Tipo,FK_idUsoProdotto,FK_idDittaFornitrice,FK_idCassetto,FK_idArmadietto, Immagine")] Prodotti prodotti)
         {
             if (ModelState.IsValid)
             {

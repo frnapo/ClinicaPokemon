@@ -3,10 +3,11 @@
     "",
     "\\ClinicaPokemon",
     "\\ClinicaPokemon\\ClinicaPokemon",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Controllers",
     "\\ClinicaPokemon\\ClinicaPokemon\\Models",
     "\\ClinicaPokemon\\ClinicaPokemon\\Views",
     "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti"
   ],
-  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
+  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Controllers\\CarrelloController.cs",
   "PreviewInSolutionExplorer": false
 }

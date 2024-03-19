@@ -42,5 +42,7 @@ namespace ClinicaPokemon.Models
 
         [NotMapped]
         public int? Quantita { get; set; }
+
+        public string Immagine { get; set; }
     }
 }

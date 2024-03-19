@@ -5,31 +5,38 @@
 }
 
 <style>
-    body{
+    .sfondo{
         background-color: #002171;
     }
-    .card {
-        background-color: #002171;
+
+    .custom-card {
+
+        background: url('@Url.Content("~/Content/img/logopoke.png")') center center ;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
+
 </style>
 
-<div class="container">
-    <div class="row ">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-6 ">
-                <div class="card border-white my-3">
-                    <div class="card-body">
-                        <h5 class="card-title text-white">Cassetto Numero: @Html.DisplayFor(modelItem => item.NumeroCassetto)</h5>
+<div class="sfondo">
+    <div class="container">
+        <div class="row ">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 ">
+                    <div class="card border-dark my-3 custom-card  bg-white">
+                        <div class="card-body ">
+                            <h5 class="card-title text-dark">Cassetto: @Html.DisplayFor(modelItem => item.NumeroCassetto)</h5>
 
-                        @*<a href="@Url.Action("Edit", "YourController", new { id=item.idCassetto })" class="card-link">Modifica</a>
-                            <a href="@Url.Action("Details", "YourController", new { id=item.idCassetto })" class="card-link">Dettagli</a>
-                            <a href="@Url.Action("Delete", "YourController", new { id=item.idCassetto })" class="card-link">Elimina</a>*@
-                        <a href="@Url.Action("Index", "Prodotti", new { id=item.idCassetto })" class="btn btn-dark text-white">Visualizza Prodotti Presenti</a>
+                            @*<a href="@Url.Action("Edit", "YourController", new { id=item.idCassetto })" class="card-link">Modifica</a>
+                                <a href="@Url.Action("Details", "YourController", new { id=item.idCassetto })" class="card-link">Dettagli</a>
+                                <a href="@Url.Action("Delete", "YourController", new { id=item.idCassetto })" class="card-link">Elimina</a>*@
+                            <a href="@Url.Action("Index", "Prodotti", new { id=item.idCassetto })" class="btn btn-dark text-white">Visualizza Prodotti</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
 
