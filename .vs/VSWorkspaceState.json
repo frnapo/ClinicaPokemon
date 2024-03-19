@@ -6,8 +6,9 @@
     "\\ClinicaPokemon\\ClinicaPokemon\\Controllers",
     "\\ClinicaPokemon\\ClinicaPokemon\\Models",
     "\\ClinicaPokemon\\ClinicaPokemon\\Views",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Cassetti",
     "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti"
   ],
-  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Controllers\\CarrelloController.cs",
+  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Cassetti\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }

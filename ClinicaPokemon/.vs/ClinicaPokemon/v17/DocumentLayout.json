@@ -3,19 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|c:\\users\\hp\\documents\\github\\clinicapokemon\\clinicapokemon\\clinicapokemon\\views\\cassetti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|solutionrelative:clinicapokemon\\views\\cassetti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|c:\\users\\hp\\documents\\github\\clinicapokemon\\clinicapokemon\\clinicapokemon\\views\\armadietti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|solutionrelative:clinicapokemon\\views\\armadietti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\clinicapokemon\\views\\prodotti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|solutionrelative:clinicapokemon\\views\\prodotti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|c:\\users\\hp\\documents\\github\\clinicapokemon\\clinicapokemon\\clinicapokemon\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|c:\\users\\hp\\documents\\github\\clinicapokemon\\clinicapokemon\\clinicapokemon\\views\\cassetti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|solutionrelative:clinicapokemon\\views\\cassetti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\clinicapokemon\\views\\armadietti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|solutionrelative:clinicapokemon\\views\\armadietti\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\clinicapokemon\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1C7A8F39-ECC0-469E-BDA1-215F4FC3B6FB}|ClinicaPokemon\\ClinicaPokemon.csproj|solutionrelative:clinicapokemon\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -26,17 +26,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
               "RelativeDocumentMoniker": "ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
               "ToolTip": "C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
               "RelativeToolTip": "ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACYAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-03-18T21:50:03.107Z",
               "IsPinned": true,
@@ -56,20 +56,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\ClinicaPokemon\\Views\\Cassetti\\Index.cshtml",
               "RelativeDocumentMoniker": "ClinicaPokemon\\Views\\Cassetti\\Index.cshtml",
               "ToolTip": "C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\ClinicaPokemon\\Views\\Cassetti\\Index.cshtml",
               "RelativeToolTip": "ClinicaPokemon\\Views\\Cassetti\\Index.cshtml",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABYAAAAaAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-03-19T15:52:58.893Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\ClinicaPokemon\\Views\\Armadietti\\Index.cshtml",
               "RelativeDocumentMoniker": "ClinicaPokemon\\Views\\Armadietti\\Index.cshtml",
@@ -88,7 +88,7 @@
               "RelativeDocumentMoniker": "ClinicaPokemon\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\HP\\Documents\\GitHub\\ClinicaPokemon\\ClinicaPokemon\\ClinicaPokemon\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "ClinicaPokemon\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAACgAAAARAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAIBJwCgAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-03-19T15:15:29.548Z",
               "EditorCaption": ""
