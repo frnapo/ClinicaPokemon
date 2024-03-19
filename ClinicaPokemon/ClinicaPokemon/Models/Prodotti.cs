@@ -1,10 +1,8 @@
 namespace ClinicaPokemon.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Prodotti")]
     public partial class Prodotti
@@ -41,5 +39,8 @@ namespace ClinicaPokemon.Models
         public virtual DittaFornitrice DittaFornitrice { get; set; }
 
         public virtual UsoProdotti UsoProdotti { get; set; }
+
+        [NotMapped]
+        public int? Quantita { get; set; }
     }
 }

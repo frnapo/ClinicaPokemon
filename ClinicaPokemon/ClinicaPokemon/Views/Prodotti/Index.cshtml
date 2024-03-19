@@ -11,7 +11,7 @@
 </p>
 <table class="table">
     <tr>
-    
+
         <th>
             @Html.DisplayNameFor(model => model.DittaFornitrice.Nome)
         </th>
@@ -27,27 +27,40 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-   
-        <td>
-            @Html.DisplayFor(modelItem => item.DittaFornitrice.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsoProdotti.Uso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeProdotto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idProdotto }) |
-       
-            @Html.ActionLink("Delete", "Delete", new { id=item.idProdotto })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DittaFornitrice.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsoProdotti.Uso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeProdotto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idProdotto }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.idProdotto })
+            </td>
+            <td>
+                @using (Html.BeginForm("AddToCart", "Prodotti", FormMethod.Post))
+                {
+                    @Html.Hidden("id", item.idProdotto)
+                    
+                    <input type="submit" value="Aggiungi al carrello" class="btn btn-warning" />
+                    <input id="Quantita" type="number" name="quantita" value="1" min="1" max="5" />
+                }
+
+        </tr>
+    }
 
 </table>
+<li>@Html.ActionLink("Carrello 🛒", "Index", "Carrello", new { area = "" }, new { @class = "nav-link" })</li>
+
+

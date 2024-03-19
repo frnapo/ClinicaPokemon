@@ -1,4 +1,5 @@
 ﻿using ClinicaPokemon.Models;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -156,5 +157,33 @@ namespace ClinicaPokemon.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // Gestione AddToCart
+
+        public ActionResult AddToCart(int id, int Quantita)
+        {
+            var prodotto = db.Prodotti.Find(id);
+
+
+            if (prodotto != null)
+            {
+                var cart = Session["cart"] as List<Prodotti> ?? new List<Prodotti>();
+                prodotto.Quantita = Quantita;
+                if (cart.Any(p => p.idProdotto == id))
+                {
+                    var prodottoInCart = cart.First(p => p.idProdotto == id);
+                    prodottoInCart.Quantita += Quantita;
+                }
+                else
+                {
+                    cart.Add(prodotto);
+                    Session["cart"] = cart;
+                    TempData["AddCart"] = "Prodotto aggiunto correttamente";
+                }
+
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
+

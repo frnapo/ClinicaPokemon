@@ -144,7 +144,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnimaliController.cs" />
     <Compile Include="Controllers\ArmadiettiController.cs" />
+    <Compile Include="Controllers\CarrelloController.cs" />
     <Compile Include="Controllers\CassettiController.cs" />
+    <Compile Include="Controllers\DettagliVenditaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdottiController.cs" />
     <Compile Include="Controllers\RicoverisController.cs" />
@@ -250,6 +252,12 @@
     <Content Include="Views\Cassetti\Details.cshtml" />
     <Content Include="Views\Cassetti\Edit.cshtml" />
     <Content Include="Views\Cassetti\Index.cshtml" />
+    <Content Include="Views\DettagliVendita\Create.cshtml" />
+    <Content Include="Views\DettagliVendita\Delete.cshtml" />
+    <Content Include="Views\DettagliVendita\Details.cshtml" />
+    <Content Include="Views\DettagliVendita\Edit.cshtml" />
+    <Content Include="Views\DettagliVendita\Index.cshtml" />
+    <Content Include="Views\Carrello\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

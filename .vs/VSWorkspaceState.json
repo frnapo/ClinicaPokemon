@@ -3,8 +3,10 @@
     "",
     "\\ClinicaPokemon",
     "\\ClinicaPokemon\\ClinicaPokemon",
-    "\\ClinicaPokemon\\ClinicaPokemon\\Models"
+    "\\ClinicaPokemon\\ClinicaPokemon\\Models",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Views",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti"
   ],
-  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Models\\Vendite.cs",
+  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }
