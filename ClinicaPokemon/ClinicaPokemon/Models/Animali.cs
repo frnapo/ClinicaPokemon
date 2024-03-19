@@ -20,6 +20,7 @@ namespace ClinicaPokemon.Models
 
         public DateTime? DataRegistrazione { get; set; } = DateTime.Now;
 
+        public string Immagine { get; set; }
         [Required]
         public string Nome { get; set; }
 
@@ -38,6 +39,8 @@ namespace ClinicaPokemon.Models
         public string NrMicro { get; set; }
 
         public int FK_idUtente { get; set; }
+
+
 
         public virtual Utenti Utenti { get; set; }
 

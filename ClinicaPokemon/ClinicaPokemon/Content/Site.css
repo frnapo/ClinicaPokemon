@@ -1,5 +1,4 @@
-﻿
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 body {
     font-family: 'Bai Jamjuree', sans-serif;
@@ -18,15 +17,17 @@ body {
     margin-top: 110px !important;
 }
 
+input,
+select,
+textarea {
+    max-width: 280px;
+}
 
 .nav-link:hover {
     color: black;
     background-color: aliceblue !important;
 }
 
-input, select, textarea {
-    max-width: 280px;
-}
 
 #heading {
     filter: drop-shadow(1px, 2px, 1px, black);
@@ -139,4 +140,55 @@ input, select, textarea {
     margin-top: 50px;
     line-height: 15.5px;
     color: #4CAF50;
+}
+.carousel-item {
+    transition: transform 0s !important;
+}
+
+#button-container {
+    position: fixed;
+    top: 42%;
+    left: 3%;
+}
+
+#add-container {
+    position: fixed;
+    top: 1%;
+    left: 32.5%;
+}
+
+#action-container {
+    position: fixed;
+    top: 2%;
+    left: 56.5%;
+}
+
+.add-action {
+    font-size: 60px;
+}
+
+
+.custom-action {
+    color: rgba(0,0,0, 0.5) !important;
+}
+
+.custom-action:hover, .custom-action:focus {
+  color: #34252A !important;
+}
+
+#refund-container {
+    position: fixed;
+    top: 14.5%;
+    left: 50%;
+}
+
+#crud-bg {
+    background: url('/Content/assets/img/crud-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    padding-top: 1px;
+}
+
+.form-switch .form-check-input {
+    cursor: pointer;
 }

@@ -171,6 +171,7 @@
     <Content Include="Content\assets\img\48x48.png" />
     <Content Include="Content\assets\img\background.jpeg" />
     <Content Include="Content\assets\img\bg-home.jpg" />
+    <Content Include="Content\assets\img\crud-bg.jpg" />
     <Content Include="Content\assets\img\logo.png" />
     <Content Include="Content\assets\img\pokedex.png" />
     <Content Include="Content\assets\img\second-bg.jpeg" />

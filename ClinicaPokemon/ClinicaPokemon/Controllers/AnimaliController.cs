@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Veterinario, Admin")]
     public class AnimaliController : Controller
     {
         private ClinicaDbContext db = new ClinicaDbContext();
@@ -35,7 +35,7 @@ namespace ClinicaPokemon.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione")] Animali animali)
+        public ActionResult Create([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione, Immagine")] Animali animali)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace ClinicaPokemon.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente")] Animali animali)
+        public ActionResult Edit([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, Immagine")] Animali animali)
         {
             if (ModelState.IsValid)
             {

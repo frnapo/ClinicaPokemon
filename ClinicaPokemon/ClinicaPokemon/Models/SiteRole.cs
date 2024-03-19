@@ -50,6 +50,8 @@ namespace ClinicaPokemon.Models
                         return new string[] { "Veterinario" };
                     case 3:
                         return new string[] { "Dottore" };
+                    case 4:
+                        return new string[] { "Admin" };
                     default:
                         return new string[] { };
                 }

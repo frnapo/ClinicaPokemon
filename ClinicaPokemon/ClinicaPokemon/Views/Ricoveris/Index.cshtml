@@ -4,83 +4,106 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Ricoveri</h2>
 
-<p>
-    @Html.ActionLink("Indietro", "Index", "Animali")
-</p>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<p>
-    @Html.ActionLink("Ricoveri Rimborsabili", "GetRicoveriAttivi", new { }, new { @class = "btn btn-success rounded-1 my-2", style = "width: auto;", @onclick = "activeRicoveri(); return false;" }))
-</p>
-<p id="ricoveriData"></p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Animali.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataInizioRicovero)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FotoAnimale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrezzoRicovero)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Attivo)
-        </th>
-        <th></th>
-    </tr>
+<div id="background">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Animali.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataInizioRicovero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FotoAnimale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrezzoRicovero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Attivo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idRicovero }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idRicovero })
-        </td>
-    </tr>
-}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rimborsi Disponibili</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="ricoveriData">
+                </div>
+                <div class="modal-footer">
 
-</table>
+                    @Html.ActionLink("Rimborsa", "SetRicoveriNonAttivi", "Ricoveris", new { }, new { @class = "btn btn-primary" })
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pokedex">
+        <div id="action-container">
+            @Html.ActionLink("Vai a Pokédex", "Index", "Animali", new { }, new { @class = "custom-action text-decoration-none fw-bold" })
+        </div>
+        <div id="add-container">
+            @Html.ActionLink(" ", "Create", new { }, new { @class = "custom-action add-action bi bi-plus-circle-fill" })
+        </div>
+        <div id="refund-container">
+            <p>
+                @{
+                    var activeRefunds = Model.Count(m => m.Attivo.HasValue && m.Attivo.Value);
+                }
+                <a href="#" class="text-decoration-none badge rounded-1 my-2" style="width: auto;" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="activeRicoveri()">
+                    @activeRefunds rimborsi disponibili
+                </a>
+            </p>
+
+        </div>
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    var item = Model.ElementAt(i);
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="~/Content/assets/img/@item.FotoAnimale" class="d-block w-100" alt="@item.Animali.Nome">
+                        <div id="button-container">
+                            @Html.ActionLink("Modifica", "Edit", new { id = item.idRicovero }, new { @class = "text-decoration-none ms-4 text-white px-5 btn btn-dark fw-bold " })
+                            @*@Html.ActionLink("Elimina", "Delete", "Delete", new { id = item.idRicovero }, new { @class = "text-decoration-none text-white px-4 btn btn-info fw-bold" })*@
+                        </div>
+                        <div class="pkm-description">
+                            <p class="m-0 p-0"> --- </p>
+                            <p class="m-0 p-0">Nome: @item.Animali.Nome</p>
+                            <p class="m-0 p-0">Tipo: @item.Animali.Tipologia</p>
+                            <p class="m-0 p-0">Colore: @item.Animali.Colore</p>
+                            <p class="m-0 p-0">Ricovero: @item.DataInizioRicovero.ToString("dd/MM/yyyy")</p>
+                            <p class="m-0 p-0">Prezzo: @String.Format("{0:F2}", item.PrezzoRicovero)€</p>
+                            <p class="m-0 p-0">Stato: @(item.Attivo.HasValue && item.Attivo.Value ? "Attivo" : "Chiuso")</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <i class="text-dark fs-1 bi bi-caret-left-fill"></i>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <i class="text-dark fs-1 bi bi-caret-right-fill"></i>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
 
 <script>
-    function activeRicoveri() {
-        $.ajax({
-            url: '@Url.Action("GetRicoveriAttivi", "Ricoveris")',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                var html = '';
-                for(var i = 0; i < data.length; i++) {
-                    html += '<p>' + data[i].Animali.Nome + ' - ' + data[i].DataInizioRicovero + ' - ' + data[i].FotoAnimale + ' - ' + data[i].PrezzoRicovero + ' - ' + data[i].Attivo + '</p>';
-                }
-                $('#ricoveriData').html(html);
-            },
-            error: function(error) {
-                console.log(error);
+function activeRicoveri() {
+    $.ajax({
+        url: '@Url.Action("GetRicoveriAttivi", "Ricoveris")',
+        type: 'GET',
+        success: function (data) {
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                var date = new Date(parseInt(data[i].DataInizioRicovero.substr(6)));
+                var formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+                html += '<div class="card mb-3 shadow-sm d-flex flex-row" style="min-height: 180px;">'; // Aggiunto d-flex flex-row per il layout flex
+                html += '<div style="flex: 0 0 180px;">';
+                html += '<img src="./Content/assets/img/' + data[i].FotoAnimale + '" class="img-fluid rounded-start" alt="Foto Animale" style="width: 100%; height: 100%; object-fit: cover;">';
+                html += '</div>';
+                html += '<div class="card-body d-flex flex-column justify-content-center">'; // Flex column per allineare il testo verticalmente
+                html += '<h5 class="card-title text-dark">' + data[i].NomeAnimale + '</h5>';
+                html += '<p class="card-text text-secondary">Inizio Ricovero: ' + formattedDate + '</p>';
+                html += '<p class="card-text text-secondary">Prezzo Ricovero: €' + data[i].PrezzoRicovero + '</p>';
+                html += '<p class="card-text ' + (data[i].Attivo ? 'text-success' : 'text-danger') + '">Stato: ' + (data[i].Attivo ? 'Attivo' : 'Non attivo') + '</p>';
+                html += '</div>';
+                html += '</div>';
             }
-        });
-     }
-    $(document).ready(function() {
-        activeRicoveri();
+            $('#ricoveriData').html(html);
+        }
     });
+}
 </script>

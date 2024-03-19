@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
 {
-    [Authorize(Roles = "Veterinario")]
+    [Authorize(Roles = "Veterinario, Admin")]
     public class VisiteController : Controller
     {
         private ClinicaDbContext db = new ClinicaDbContext();
