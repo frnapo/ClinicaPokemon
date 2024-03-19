@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
 {
-    [Authorize(Roles = "Veterinario, Admin")]
+
     public class AnimaliController : Controller
     {
         private ClinicaDbContext db = new ClinicaDbContext();
 
-        // GET: Animali
+        [Authorize(Roles = "Veterinario, Admin")]
         public ActionResult Index()
         {
             var animali = db.Animali.Include(a => a.Utenti);
@@ -19,7 +19,7 @@ namespace ClinicaPokemon.Controllers
         }
 
 
-        // GET: Animali/Create
+        [Authorize(Roles = "Veterinario, Admin")]
         public ActionResult Create()
         {
             ViewBag.FK_idUtente = new SelectList(db.Utenti.Select(u => new
@@ -53,7 +53,45 @@ namespace ClinicaPokemon.Controllers
             return View(animali);
         }
 
-        // GET: Animali/Edit/5
+
+        [Authorize(Roles = "Veterinario, Utente, Admin")]
+        public ActionResult CreateForUser()
+        {
+            var userId = db.Utenti.FirstOrDefault(u => u.Username == User.Identity.Name).idUtente;
+            ViewBag.FK_idUtente = new SelectList(db.Utenti.Where(u => u.idUtente == userId).Select(u => new
+            {
+                idUtente = u.idUtente,
+                NomeCompleto = u.Cognome + " " + u.Nome
+            }), "idUtente", "NomeCompleto");
+            return View("CreateForUser");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateForUser([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione, Immagine")] Animali animali)
+        {
+            var userId = db.Utenti.FirstOrDefault(u => u.Username == User.Identity.Name).idUtente;
+            if (ModelState.IsValid && animali.FK_idUtente == userId)
+            {
+                db.Animali.Add(animali);
+                db.SaveChanges();
+                TempData["Message"] = "Il tuo Pokémon è stato inserito nei nostri sistemi!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.FK_idUtente = new SelectList(db.Utenti.Where(u => u.idUtente == userId).Select(u => new
+            {
+                idUtente = u.idUtente,
+                NomeCompleto = u.Cognome + " " + u.Nome
+            }), "idUtente", "NomeCompleto", animali.FK_idUtente);
+
+            return View(animali);
+        }
+
+
+
+
+        [Authorize(Roles = "Veterinario, Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

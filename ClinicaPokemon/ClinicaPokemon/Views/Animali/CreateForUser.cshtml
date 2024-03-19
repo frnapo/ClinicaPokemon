@@ -1,17 +1,18 @@
 ﻿@model ClinicaPokemon.Models.Animali
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
 <div id="crud-bg">
-
+    <h2 class="text-center text-white fw-bold display-3 pb-2 my-4 shadow">Registra il tuo Pokémon</h2>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        <h2 class="text-center text-white fw-bold display-3 pb-2 my-4 shadow">Modifica @Model.Nome</h2>
-        <div class="container"  style="padding-bottom: 170px">
+
+
+        <div class="container" style="padding-bottom: 170px">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card bg-white bg-opacity-50">
@@ -20,10 +21,9 @@
                         </div>
                         <div class="card-body">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.idAnimale)
 
                             <div class="form-group row my-1">
-                                @Html.LabelFor(model => model.FK_idUtente, "FK_idUtente", htmlAttributes: new { @class = "col-md-4 col-form-label" })
+                                @Html.LabelFor(model => model.FK_idUtente, "Padrone", htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
                                     @Html.DropDownList("FK_idUtente", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.FK_idUtente, "", new { @class = "text-danger" })
@@ -33,16 +33,15 @@
                             <div class="form-group row my-1">
                                 @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Inserisci il nome es. Snorlax" } })
                                     @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-
                             <div class="form-group row my-1">
                                 @Html.LabelFor(model => model.Tipologia, htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Tipologia, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Tipologia, new { htmlAttributes = new { @class = "form-control", @placeholder = "Inserisci il tipo es. Psico" } })
                                     @Html.ValidationMessageFor(model => model.Tipologia, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -50,7 +49,7 @@
                             <div class="form-group row my-1">
                                 @Html.LabelFor(model => model.Colore, htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Colore, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Colore, new { htmlAttributes = new { @class = "form-control", @placeholder = "Inserisci il colore es. Rosa" } })
                                     @Html.ValidationMessageFor(model => model.Colore, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -58,7 +57,7 @@
                             <div class="form-group row my-1">
                                 @Html.LabelFor(model => model.Immagine, htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Immagine, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Immagine, new { htmlAttributes = new { @class = "form-control", @placeholder = "Percorso immagine" } })
                                     @Html.ValidationMessageFor(model => model.Immagine, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -82,7 +81,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row my-1" id="NrMicroDiv" style="display:">
+                            <div class="form-group row my-1" id="NrMicroDiv" style="display: none;">
                                 @Html.LabelFor(model => model.NrMicro, "Numero", htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
                                     @Html.EditorFor(model => model.NrMicro, new { htmlAttributes = new { @class = "form-control" } })
@@ -90,11 +89,10 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row mt-3">
                                 <div class="col-md-8 offset-md-4 d-flex">
-                                    @Html.ActionLink("Annulla", "Index", null, new { @class = "fs-4 bg-dark text-decoration-none me-3 text-white rounded-pill p-2 px-3 " })
-                                    <input type="submit" value="Salva" class="fs-4 bg-white text-dark nav-link rounded-pill p-1 px-3 w-50" />
+                                    @Html.ActionLink("Indietro", "Index", "Home", null, new { @class = "fs-4 bg-dark text-decoration-none me-3 text-white rounded-pill p-2 px-3 " })
+                                    <input type="submit" value="Inserisci" class="fs-4 bg-white text-dark nav-link rounded-pill p-1 px-3" />
                                 </div>
                             </div>
                         </div>
@@ -102,7 +100,9 @@
                 </div>
             </div>
         </div>
+
     }
+
 
 </div>
 
@@ -121,10 +121,6 @@
             });
         });
     </script>
-
 }
-
-
-
 
 

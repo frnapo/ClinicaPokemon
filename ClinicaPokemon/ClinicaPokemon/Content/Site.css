@@ -4,7 +4,8 @@ body {
     font-family: 'Bai Jamjuree', sans-serif;
     background: url('/Content/assets/img/second-bg.jpeg') no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden; /* da cambiare */
+    overflow-x: hidden;
+    /*overflow: hidden;*/ /* da cambiare */
 }
 
 .nav-link {
@@ -17,11 +18,11 @@ body {
     margin-top: 110px !important;
 }
 
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
-}
+}*/
 
 .nav-link:hover {
     color: black;
@@ -185,9 +186,11 @@ textarea {
 #crud-bg {
     background: url('/Content/assets/img/crud-bg.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 100vh;
+    height: 88vh;
     padding-top: 1px;
 }
+
+
 
 .form-switch .form-check-input {
     cursor: pointer;

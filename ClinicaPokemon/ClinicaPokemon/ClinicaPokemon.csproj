@@ -230,12 +230,12 @@
     <Content Include="Views\Animali\Index.cshtml" />
     <Content Include="Views\Visite\Create.cshtml" />
     <Content Include="Views\Visite\Delete.cshtml" />
-    <Content Include="Views\Visite\Details.cshtml" />
     <Content Include="Views\Visite\Edit.cshtml" />
     <Content Include="Views\Visite\Index.cshtml" />
     <Content Include="Views\Ricoveris\Create.cshtml" />
     <Content Include="Views\Ricoveris\Edit.cshtml" />
     <Content Include="Views\Ricoveris\Index.cshtml" />
+    <Content Include="Views\Animali\CreateForUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

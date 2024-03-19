@@ -5,51 +5,32 @@
     var idAnimale = Request.QueryString["idAnimale"];
 }
 
-<h2>Visite precedenti</h2>
+<div id="crud-bg">
+    <h2 class="text-center text-white fw-bold display-4 pb-2 my-4 shadow">Visite Precedenti</h2>
+    <div class="container mt-3">
 
-<p>
-    @Html.ActionLink("Indietro", "Index", "Animali", new { idAnimale = idAnimale }, null)
-</p>
-<p>
-    @Html.ActionLink("Nuova visita", "Create", "Visite", new { idAnimale = idAnimale }, null)
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Animali.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataVisita)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EsameObiettivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DescrizioneCura)
-        </th>
-        <th></th>
-    </tr>
+        <div class="d-flex justify-content-between mb-3">
+            @Html.ActionLink("Indietro", "Index", "Animali", new { idAnimale = idAnimale }, new { @class = "btn btn-dark" })
+            @Html.ActionLink("Nuova visita", "Create", "Visite", new { idAnimale = idAnimale }, new { @class = "btn btn-info" })
+        </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Animali.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataVisita)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EsameObiettivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DescrizioneCura)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idVisita }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idVisita }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idVisita })
-        </td>
-    </tr>
-}
-
-</table>
+        @foreach (var item in Model)
+        {
+            <div class="row mb-2 bg-light bg-opacity-50 shadow-sm rounded">
+                <div class="col-md-4 py-2">
+                    <strong>Data Visita:</strong> @Html.DisplayFor(modelItem => item.DataVisita)
+                </div>
+                <div class="col-md-4 py-2">
+                    <strong>Esame Obiettivo:</strong> @Html.DisplayFor(modelItem => item.EsameObiettivo)
+                </div>
+                <div class="col-md-4 py-2">
+                    <strong>Descrizione Cura:</strong> @Html.DisplayFor(modelItem => item.DescrizioneCura)
+                </div>
+                <div class="col-md-12 py-2 text-end">
+                    @Html.ActionLink("Modifica", "Edit", new { id = item.idVisita }, new { @class = "btn btn-sm btn-dark me-1" })
+                    @Html.ActionLink("Elimina", "Delete", new { id = item.idVisita }, new { @class = "btn btn-sm btn-danger" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
