@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ClinicaPokemon",
+    "\\ClinicaPokemon\\ClinicaPokemon",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Controllers",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Models",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Views",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Cassetti",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti"
+  ],
+  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
+  "PreviewInSolutionExplorer": false
+}

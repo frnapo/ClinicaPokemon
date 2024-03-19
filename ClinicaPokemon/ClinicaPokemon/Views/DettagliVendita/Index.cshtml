@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ClinicaPokemon.Models.DettagliVendita>
+@using ClinicaPokemon.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Prodotti.NomeProdotto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prodotti.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prodotti.FK_idUsoProdotto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prodotti.FK_idDittaFornitrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prodotti.FK_idCassetto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prodotti.FK_idArmadietto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendite.idVendita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantita)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prodotti.NomeProdotto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prodotti.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prodotti.FK_idUsoProdotto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prodotti.FK_idDittaFornitrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prodotti.FK_idCassetto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prodotti.FK_idArmadietto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vendite.idVendita)
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.Quantita)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idDettagli }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idDettagli }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idDettagli })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ClinicaPokemon.Models.Prodotti>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .sfondo {
+         background: url('@Url.Content("~/Content/img/sfondoProdotti.jpg")');
+         
+    }
+</style>
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<div class="sfondo">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center mt-2">Poke-Shop</h2>
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6 ">
+                    <div class="card my-3 bg-white bg-opacity-75">
+                        <div class="card-header fw-bold">
+                            @Html.DisplayFor(modelItem => item.NomeProdotto)
+                        </div>
+                        <div class="card-body">
+                            <img src="~/Content/img/@item.Immagine" height="80" />
+                            <h5 class="card-title my-2">Ditta Fornitrice: @Html.DisplayFor(modelItem => item.DittaFornitrice.Nome)</h5>
+                            <p class="card-text fw-bold">Uso: @Html.DisplayFor(modelItem => item.UsoProdotti.Uso)</p>
+                            @*<p class="card-text">Medicinale: @Html.DisplayFor(modelItem => item.Tipo)</p>*@
+                            @if (item.Tipo)
+                            {
+                                <p class="card-text fw-bold">Tipo: Alimento</p>
+                            }
+                            else
+                            {
+                                <p class="card-text fw-bold">Tipo: Medicinale</p>
+                            }
+
+                            @*<a href="@Url.Action("Edit", "Edit", new { id = item.idProdotto })" class="card-link">Edit</a>*@
+                            @*<a href="@Url.Action("Delete", "Delete", new { id = item.idProdotto })" class="card-link">Delete</a>*@
+                            @using (Html.BeginForm("AddToCart", "Prodotti", FormMethod.Post, new { @class = "d-inline" }))
+                            {
+                                @Html.Hidden("id", item.idProdotto)
+                                <input type="submit" value="Aggiungi al carrello" class="btn btn-warning" />
+                                <input id="Quantita" type="number" name="quantita" value="1" min="1" max="5" class="form-control w-auto d-inline" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <p class="mb-0">@Html.ActionLink("Carrello 🛒", "Index", "Carrello", new { area = "" }, new { @class = "btn btn-warning" })</p>
+</div>
+
+

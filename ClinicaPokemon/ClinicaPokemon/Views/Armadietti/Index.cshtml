@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ClinicaPokemon.Models.Armadietti>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .sfondo{
+        background-color: #002171;
+    }
+
+    .custom-card {
+        
+        background: url('@Url.Content("~/Content/img/logopoke.png")') center center ;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+</style>
+
+
+<div class="sfondo">
+    <div class="container ">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6">
+                    <div class="card my-3 border-dark custom-card bg-white">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">Armadietto: @Html.DisplayFor(modelItem => item.NumeroArmadietto)</h5>
+                            <p class="card-text">
+
+                            </p>
+                            <a href="@Url.Action("Index", "Cassetti", new { FK_idArmadietto = item.idArmadietto })" class="btn btn-dark text-white">Prosegui su Cassetti</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,42 @@
+﻿@model ClinicaPokemon.Models.DettagliVendita
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DettagliVendita</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Prodotti.NomeProdotto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prodotti.NomeProdotto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendite.idVendita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendite.idVendita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantita)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idDettagli }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
