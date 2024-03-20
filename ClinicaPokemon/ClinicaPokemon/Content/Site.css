@@ -72,7 +72,7 @@ textarea {
     right: 0;
 }
 
-#Animali-footer, #Ricoveris-footer, #Visite-footer, #Prodotti-footer, #Carrello-footer {
+#Animali-footer, #Ricoveris-footer, #Visite-footer, #Prodotti-footer, #Carrello-footer, #Arena-footer {
     background-color: #AE222B;
     letter-spacing: 2px;
     position: fixed;
@@ -85,7 +85,7 @@ textarea {
     background-color: #002171;
 }
 
-#Animali-navbar, #Ricoveris-navbar, #Visite-navbar, #Prodotti-navbar, #Carrello-navbar {
+#Animali-navbar, #Ricoveris-navbar, #Visite-navbar, #Prodotti-navbar, #Carrello-navbar, #Arena-navbar {
     background-color: #AE222B;
 }
 
@@ -236,3 +236,60 @@ textarea {
 .carrello-title {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
+/* ------------ARENA POKEMON------------*/
+
+#arena {
+    background: url('/Content/assets/img/arena.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    height: 88vh;
+    padding-top: 1px;
+    position: relative;
+}
+
+.arena-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.pokemon-select {
+    margin: 10px 0;
+}
+
+.pokemon-img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.hp-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 4px;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+
+.hp-fill {
+    height: 20px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+}
+
+#pokemon1Details, #pokemon2Details {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .arena-container {
+        flex-direction: column;
+    }
+}
+
+
+

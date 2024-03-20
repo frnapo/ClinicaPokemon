@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnimaliController.cs" />
+    <Compile Include="Controllers\ArenaController.cs" />
     <Compile Include="Controllers\ArmadiettiController.cs" />
     <Compile Include="Controllers\CarrelloController.cs" />
     <Compile Include="Controllers\CassettiController.cs" />
@@ -282,6 +283,7 @@
     <Content Include="Views\Prodotti\Details.cshtml" />
     <Content Include="Views\Prodotti\Edit.cshtml" />
     <Content Include="Views\Prodotti\Index.cshtml" />
+    <Content Include="Views\Arena\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
