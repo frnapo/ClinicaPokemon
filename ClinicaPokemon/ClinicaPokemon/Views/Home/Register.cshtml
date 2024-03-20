@@ -3,67 +3,69 @@
 @{
     ViewBag.Title = "Register";
 }
-<div id="second-bg" class="bg-white bg-opacity-10 shadow text-white">
-    <h2 class="text-center fw-bold display-3 pb-2 my-4 shadow">Registrati</h2>
-    <p class="text-center" style="margin-inline: 20%"><span class="fw-bolder">Perchè registrarsi?</span> - Potrai accedere a servizi esclusivi come prenotazioni online oltre a consultazioni veterinarie personalizzate per il tuo Pokémon. Registrati ora per iniziare a ricevere la migliore cura per il tuo compagno!</p>
+<div id="second-bg">
+    <div class="bg-white bg-opacity-10 shadow text-white">
+        <h2 class="text-center fw-bold display-3 pb-2 my-4 shadow">Registrati</h2>
+        <p class="text-center" style="margin-inline: 20%"><span class="fw-bolder">Perchè registrarsi?</span> - Potrai accedere a servizi esclusivi come prenotazioni online oltre a consultazioni veterinarie personalizzate per il tuo Pokémon. Registrati ora per iniziare a ricevere la migliore cura per il tuo compagno!</p>
 
 
 
-    <div class="container" style="padding-bottom: 115px">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+        <div class="container" style="padding-bottom: 115px">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group text-center">
-                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2 py-2" })
-                    <div class="mx-auto col-6 text-center">
-                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control mx-auto" } })
-                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group text-center">
+                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2 py-2" })
+                        <div class="mx-auto col-6 text-center">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        @Html.LabelFor(model => model.Psw, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
+                        <div class="mx-auto col-6 text-center">
+                            @Html.EditorFor(model => model.Psw, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                            @Html.ValidationMessageFor(model => model.Psw, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
+                        <div class="mx-auto col-6 text-center">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        @Html.LabelFor(model => model.Cognome, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
+                        <div class="mx-auto col-6 text-center">
+                            @Html.EditorFor(model => model.Cognome, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                            @Html.ValidationMessageFor(model => model.Cognome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group text-center">
+                        @Html.LabelFor(model => model.CodFiscale, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
+                        <div class="mx-auto col-6 text-center">
+                            @Html.EditorFor(model => model.CodFiscale, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                            @Html.ValidationMessageFor(model => model.CodFiscale, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <div class="mx-auto col-6 text-center">
+                            <input type="submit" value="Registrati" class="mx-auto fs-4 bg-transparent nav-link rounded-pill p-2 px-3 my-5 w-100" />
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group text-center">
-                    @Html.LabelFor(model => model.Psw, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
-                    <div class="mx-auto col-6 text-center">
-                        @Html.EditorFor(model => model.Psw, new { htmlAttributes = new { @class = "form-control mx-auto" } })
-                        @Html.ValidationMessageFor(model => model.Psw, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group text-center">
-                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
-                    <div class="mx-auto col-6 text-center">
-                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control mx-auto" } })
-                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group text-center">
-                    @Html.LabelFor(model => model.Cognome, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
-                    <div class="mx-auto col-6 text-center">
-                        @Html.EditorFor(model => model.Cognome, new { htmlAttributes = new { @class = "form-control mx-auto" } })
-                        @Html.ValidationMessageFor(model => model.Cognome, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                <div class="form-group text-center">
-                    @Html.LabelFor(model => model.CodFiscale, htmlAttributes: new { @class = "control-label col-md-2 py-1" })
-                    <div class="mx-auto col-6 text-center">
-                        @Html.EditorFor(model => model.CodFiscale, new { htmlAttributes = new { @class = "form-control mx-auto" } })
-                        @Html.ValidationMessageFor(model => model.CodFiscale, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group text-center">
-                    <div class="mx-auto col-6 text-center">
-                        <input type="submit" value="Registrati" class="mx-auto fs-4 bg-transparent nav-link rounded-pill p-2 px-3 my-5 w-100" />
-                    </div>
-                </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
 
