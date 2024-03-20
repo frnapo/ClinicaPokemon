@@ -117,7 +117,6 @@ namespace ClinicaPokemon.Controllers
                     return false;
                 }
             }
-
             return true;
         }
 
@@ -125,6 +124,7 @@ namespace ClinicaPokemon.Controllers
         {
             FormsAuthentication.SignOut();
             TempData["Logout"] = "Sei stato disconesso";
+            Session.Clear();
             return RedirectToAction("Index");
         }
     }

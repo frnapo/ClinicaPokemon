@@ -1,0 +1,155 @@
+﻿@using ClinicaPokemon.Models
+@using (Html.BeginForm("Combatti", "Arena", FormMethod.Post))
+{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <div id="arena">
+        <div class="container">
+
+            <h2 class="text-center text-white fw-bold display-3 pb-2 my-4 shadow">Arena Pokémon</h2>
+            <div id="countdown" class="fs-2 fw-bold text-white text-center my-3" style="display: none;"></div>
+            <div id="winnerMessage" class="fs-2 fw-bold text-white text-center my-3" style="display: none;"></div>
+            <div id="reset" class="fs-4 text-white text-center my-3"></div>
+
+            @using (Html.BeginForm("Combatti", "Arena", FormMethod.Post, new { @class = "mt-3" }))
+            {
+                <div class="arena-container">
+                    <div id="pokemon1Details" class="pokemon-details">
+                        <div class="pokemon-select">
+                            @Html.DropDownList("pokemon1Id", (SelectList)ViewBag.Pokemon1SelectList, "Seleziona Pokémon 1", new { @class = "form-control" })
+                        </div>
+                        <div id="pokemon1HP" class="hp-bar" style="display: none;"></div>
+                        <img id="pokemon1Image" src="" alt="Immagine Pokémon 1" class="pokemon-img" style="display: none;" />
+                    </div>
+                    <div id="pokemon2Details" class="pokemon-details">
+                        <div class="pokemon-select">
+                            @Html.DropDownList("pokemon2Id", (SelectList)ViewBag.Pokemon2SelectList, "Seleziona Pokémon 2", new { @class = "form-control" })
+                        </div>
+                        <div id="pokemon2HP" class="hp-bar" style="display: none;"></div>
+                        <img id="pokemon2Image" src="" alt="Immagine Pokémon 2" class="pokemon-img" style="display: none;" />
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" id="combattiBtn" class="btn btn-dark border  fw-bold border-3 border-dark rounded-pill px-5 p-2 mt-3">Combatti!</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+<script>
+
+
+
+$(document).ready(function(){
+    $('#pokemon1Id').change(function(){
+        var pokemonId = $(this).val();
+        $.ajax({
+            url: '@Url.Action("GetPokemonDetails", "Arena")',
+            type: 'GET',
+            data: { id: pokemonId },
+            success: function(data){
+                $('#pokemon1Image').attr('src', data.immagine).show();
+            }
+        });
+    });
+
+    $('#pokemon2Id').change(function(){
+        var pokemonId = $(this).val();
+        $.ajax({
+            url: '@Url.Action("GetPokemonDetails", "Arena")',
+            type: 'GET',
+            data: { id: pokemonId },
+            success: function(data){
+                $('#pokemon2Image').attr('src', data.immagine).show();
+            }
+        });
+    });
+});
+
+
+    function updateHPBar(barId, hp) {
+        var barHtml = `<div class="hp-fill" style="width: ${hp}%;">${hp} HP</div>`;
+        $(barId).html(barHtml).show();
+    }
+
+
+    function animateAttack(winnerId, loserId, afterAttackCallback) {
+        $(winnerId).animate({
+            marginLeft: "+=50px"
+        }, 500, function () {
+            $(this).animate({
+                marginLeft: "-=50px"
+            }, 500, function () {
+                $(loserId).fadeOut(500).fadeIn(500, function () {
+                    if (typeof afterAttackCallback === "function") {
+                        afterAttackCallback();
+                    }
+                });
+            });
+        });
+    }
+
+
+    $("#combattiBtn").click(function (e) {
+        e.preventDefault();
+
+        var hp1 = Math.floor(Math.random() * 100) + 1;
+        var hp2 = Math.floor(Math.random() * 100) + 1;
+
+        updateHPBar("#pokemon1HP", hp1);
+        updateHPBar("#pokemon2HP", hp2);
+
+        var pokemon1Name = $("#pokemon1Id option:selected").text();
+        var pokemon2Name = $("#pokemon2Id option:selected").text();
+
+        $("#countdown").text("La battaglia inizierà tra 3").show();
+
+        var countdown = 2;
+        var interval = setInterval(function () {
+            $("#countdown").text(`La battaglia inizierà tra ${countdown}`);
+            countdown--;
+            if (countdown < 0) {
+                clearInterval(interval);
+                $("#countdown").hide();
+
+                var loserHPBar;
+                var winnerMessageText;
+
+                if (hp1 > hp2) {
+                    animateAttack("#pokemon1Details", "#pokemon2Details");
+                    loserHPBar = "#pokemon2HP";
+                    winnerMessageText = `${pokemon1Name} ha vinto!`;
+                } else if (hp2 > hp1) {
+                    animateAttack("#pokemon2Details", "#pokemon1Details");
+                    loserHPBar = "#pokemon1HP";
+                    winnerMessageText = `${pokemon2Name} ha vinto!`;
+                } else {
+                    $("#winnerMessage").text("È un pareggio!").show();
+                    return; 
+                }
+
+                $(loserHPBar).find('.hp-fill').css('background-color', 'red').animate({
+                    width: '0%'
+                }, 500, function () {
+                    $("#winnerMessage").text(winnerMessageText).show();
+                    startResetCountdown();
+                });
+            }
+        }, 1000);
+    });
+
+    function startResetCountdown() {
+        var resetCountdown = 5;
+        $("#reset").text(`La pagina verrà resettata tra ${resetCountdown}...`);
+        var resetInterval = setInterval(function () {
+            resetCountdown--;
+            if (resetCountdown > 0) {
+                $("#reset").text(`La pagina verrà resettata tra ${resetCountdown}...`);
+            } else {
+                clearInterval(resetInterval);
+                location.reload(); 
+            }
+        }, 1000);
+    }
+</script>
