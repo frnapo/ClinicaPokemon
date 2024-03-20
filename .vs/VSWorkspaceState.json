@@ -3,12 +3,12 @@
     "",
     "\\ClinicaPokemon",
     "\\ClinicaPokemon\\ClinicaPokemon",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Content\\assets",
+    "\\ClinicaPokemon\\ClinicaPokemon\\Content\\assets\\img",
     "\\ClinicaPokemon\\ClinicaPokemon\\Controllers",
     "\\ClinicaPokemon\\ClinicaPokemon\\Models",
-    "\\ClinicaPokemon\\ClinicaPokemon\\Views",
-    "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Cassetti",
-    "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti"
+    "\\ClinicaPokemon\\ClinicaPokemon\\Views"
   ],
-  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Views\\Prodotti\\Index.cshtml",
+  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Web.config",
   "PreviewInSolutionExplorer": false
 }

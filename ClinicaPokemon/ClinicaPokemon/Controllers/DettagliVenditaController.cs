@@ -1,7 +1,9 @@
 ﻿using ClinicaPokemon.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
@@ -128,5 +130,23 @@ namespace ClinicaPokemon.Controllers
             }
             base.Dispose(disposing);
         }
+        // GET: DettagliVendita/ProdottiVendutiInData
+        public async Task<JsonResult> ProdottiVendutiInData(DateTime data)
+        {
+            var venditeInData = await db.Vendite
+                .Include(v => v.DettagliVendita)
+                .Where(v => DbFunctions.TruncateTime(v.DataVendita) == DbFunctions.TruncateTime(data))
+                .ToListAsync();
+
+            var prodottiVenduti = new System.Collections.Generic.List<DettagliVendita>();
+
+            foreach (var vendita in venditeInData)
+            {
+                prodottiVenduti.AddRange(vendita.DettagliVendita);
+            }
+
+            return Json(prodottiVenduti, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
