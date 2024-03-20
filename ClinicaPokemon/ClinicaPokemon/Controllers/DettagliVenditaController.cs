@@ -131,21 +131,31 @@ namespace ClinicaPokemon.Controllers
             base.Dispose(disposing);
         }
         // GET: DettagliVendita/ProdottiVendutiInData
-        public async Task<JsonResult> ProdottiVendutiInData(DateTime data)
+        //public async Task<JsonResult> ProdottiVendutiInData(DateTime data)
+        //{
+        //    var venditeInData = await db.Vendite
+        //        .Include(v => v.DettagliVendita)
+        //        .Where(v => DbFunctions.TruncateTime(v.DataVendita) == DbFunctions.TruncateTime(data))
+        //        .ToListAsync();
+
+        //    var prodottiVenduti = new System.Collections.Generic.List<DettagliVendita>();
+
+        //    foreach (var vendita in venditeInData)
+        //    {
+        //        prodottiVenduti.AddRange(vendita.DettagliVendita);
+        //    }
+
+        //    return Json(prodottiVenduti, JsonRequestBehavior.AllowGet);
+        //}
+
+        public async Task<JsonResult> DataVendita(DateTime data)
         {
-            var venditeInData = await db.Vendite
-                .Include(v => v.DettagliVendita)
+            var vendite = await db.Vendite
                 .Where(v => DbFunctions.TruncateTime(v.DataVendita) == DbFunctions.TruncateTime(data))
+                .Select(v => new { v.idVendita, v.DataVendita, v.DettagliVendita })
                 .ToListAsync();
 
-            var prodottiVenduti = new System.Collections.Generic.List<DettagliVendita>();
-
-            foreach (var vendita in venditeInData)
-            {
-                prodottiVenduti.AddRange(vendita.DettagliVendita);
-            }
-
-            return Json(prodottiVenduti, JsonRequestBehavior.AllowGet);
+            return Json(vendite, JsonRequestBehavior.AllowGet);
         }
 
     }

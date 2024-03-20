@@ -23,6 +23,7 @@
         </div>
     </div>
 
+
     <h2 class="text-white">Dettagli</h2>
 
     @*<p>
@@ -81,22 +82,39 @@
         Mostra Prodotti Venduti In Data
     </button>
 
+
     @section Scripts {
         <script>
-            $(document).ready(function () {
-                $('#showModalButton').click(function () {
-                    var selectedDate = $('#datePicker').val();
-                    $.get('/DettagliVendita/ProdottiVendutiInData', { data: selectedDate })
-                        .done(function (data) {
-                            $('#modalContent').html(data);
-                            $('#myModal').modal('show');
-                        })
-                        .fail(function () {
-                            $('#modalContent').html('<p>Si è verificato un errore nel caricamento dei dati.</p>');
-                            $('#myModal').modal('show');
-                        });
+                $(document).ready(function () {
+                    $('#showModalButton').click(function () {
+                        var selectedDate = $('#datePicker').val();
+                        if (selectedDate) {
+                            $.ajax({
+                                url: '@Url.Action("DataVendita", "DettagliVendita")',
+                                type: 'GET',
+                                data: { data: selectedDate },
+                                success: function (data) {
+                                    var content = '';
+                                    $.each(data, function (index, vendita) {
+                                        content += '<h5>Vendita ID: ' + vendita.idVendita + '</h5>';
+                                        content += '<p>Data Vendita: ' + vendita.DataVendita + '</p>';
+                                        $.each(vendita.DettagliVendita, function (index, dettagli) {
+                                            content += '<p>Prodotto ID: ' + dettagli.FK_idProdotto + ', Quantità: ' + dettagli.Quantita + '</p>';
+                                        });
+                                        content += '<hr />';
+                                    });
+                                    $('#modalContent').html(content);
+                                    $('#myModal').modal('show');
+                                },
+                                error: function () {
+                                    alert('Errore nel recupero dei dati.');
+                                }
+                            });
+                        } else {
+                            alert('Seleziona una data.');
+                        }
+                    });
                 });
-            });
         </script>
     }
 
