@@ -18,7 +18,7 @@
                 {
                     var item = Model.ElementAt(i);
                     <div class="carousel-item @(i == 0 ? "active" : "")">
-                        <img src="~/Content/assets/img/@item.Immagine" class="d-block w-100" alt="@item.Nome">
+                        <img src="@item.Immagine" class="d-block w-100" alt="@item.Nome">
                         <div id="button-container">
                             @Html.ActionLink("Modifica", "Edit", new { id = item.idAnimale }, new { @class = "text-decoration-none text-white px-4 btn btn-dark fw-bold" })
                             @Html.ActionLink("Visite", "Index", "Visite", new { idAnimale = item.idAnimale }, new { @class = "text-decoration-none text-white px-4 btn btn-info fw-bold" })

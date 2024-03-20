@@ -15,7 +15,6 @@ namespace ClinicaPokemon.Models
         [DataType(DataType.Date)]
         public DateTime DataInizioRicovero { get; set; }
 
-        [Required]
         public string FotoAnimale { get; set; }
 
         [Column(TypeName = "money")]

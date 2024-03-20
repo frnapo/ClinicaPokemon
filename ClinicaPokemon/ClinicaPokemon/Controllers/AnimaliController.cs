@@ -1,7 +1,10 @@
 ﻿using ClinicaPokemon.Models;
+using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
@@ -35,15 +38,37 @@ namespace ClinicaPokemon.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione, Immagine")] Animali animali)
+        public ActionResult Create([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione, Immagine")] Animali animali, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Animali.Add(animali);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    if (!Directory.Exists(Server.MapPath("~/Content/assets/img")))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Content/assets/img"));
+                    }
+                    file.SaveAs(path);
+                    animali.Immagine = "/Content/assets/img/" + fileName;
+                }
+                else
+                {
+                    animali.Immagine = "/Content/assets/img/Default.png";
+                }
 
+                if (ModelState.IsValid)
+                {
+                    db.Animali.Add(animali);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Errore durante il salvataggio del file: " + ex.Message);
+            }
             ViewBag.FK_idUtente = new SelectList(db.Utenti.Select(u => new
             {
                 idUtente = u.idUtente,
@@ -68,15 +93,38 @@ namespace ClinicaPokemon.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateForUser([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione, Immagine")] Animali animali)
+        public ActionResult CreateForUser([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, DataRegistrazione, Immagine")] Animali animali, HttpPostedFileBase file)
         {
             var userId = db.Utenti.FirstOrDefault(u => u.Username == User.Identity.Name).idUtente;
-            if (ModelState.IsValid && animali.FK_idUtente == userId)
+            try
             {
-                db.Animali.Add(animali);
-                db.SaveChanges();
-                TempData["Message"] = "Il tuo Pokémon è stato inserito nei nostri sistemi!";
-                return RedirectToAction("Index", "Home");
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    if (!Directory.Exists(Server.MapPath("~/Content/assets/img")))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Content/assets/img"));
+                    }
+                    file.SaveAs(path);
+                    animali.Immagine = "/Content/assets/img/" + fileName;
+                }
+                else
+                {
+                    animali.Immagine = "/Content/assets/img/Default.png";
+                }
+
+                if (ModelState.IsValid && animali.FK_idUtente == userId)
+                {
+                    db.Animali.Add(animali);
+                    db.SaveChanges();
+                    TempData["Message"] = "Il tuo Pokémon è stato inserito nei nostri sistemi!";
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Errore durante il salvataggio del file: " + ex.Message);
             }
 
             ViewBag.FK_idUtente = new SelectList(db.Utenti.Where(u => u.idUtente == userId).Select(u => new
@@ -107,18 +155,45 @@ namespace ClinicaPokemon.Controllers
             return View(animali);
         }
 
-        // POST: Animali/Edit/5
-        // Per la protezione da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, Immagine")] Animali animali)
+        public ActionResult Edit(int id, [Bind(Include = "idAnimale,Nome,Tipologia,Colore,Microchip,NrMicro,FK_idUtente, Immagine, DataNascita")] Animali animali, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(animali).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var oldAnimal = db.Animali.AsNoTracking().FirstOrDefault(a => a.idAnimale == id);
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        if (!string.IsNullOrWhiteSpace(oldAnimal.Immagine))
+                        {
+                            var existingImagePath = Path.Combine(Server.MapPath("~/Content/assets/img/"), oldAnimal.Immagine);
+                            if (System.IO.File.Exists(existingImagePath))
+                            {
+                                System.IO.File.Delete(existingImagePath);
+                            }
+                        }
+
+                        var fileName = Path.GetFileNameWithoutExtension(file.FileName) + DateTime.Now.Ticks + Path.GetExtension(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/assets/img/"), fileName);
+                        file.SaveAs(path);
+
+                        animali.Immagine = "/Content/assets/img/" + fileName;
+                    }
+                    else
+                    {
+                        animali.Immagine = oldAnimal.Immagine;
+                    }
+                    db.Entry(animali).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             ViewBag.FK_idUtente = new SelectList(db.Utenti, "idUtente", "Username", animali.FK_idUtente);
             return View(animali);

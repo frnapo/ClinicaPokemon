@@ -24,7 +24,7 @@ namespace ClinicaPokemon.Controllers
             {
                 return HttpNotFound();
             }
-            return Json(new { nome = pokemon.Nome, immagine = Url.Content($"~/Content/assets/img/{pokemon.Immagine}") }, JsonRequestBehavior.AllowGet);
+            return Json(new { nome = pokemon.Nome, immagine = Url.Content($"{pokemon.Immagine}") }, JsonRequestBehavior.AllowGet);
         }
     }
 

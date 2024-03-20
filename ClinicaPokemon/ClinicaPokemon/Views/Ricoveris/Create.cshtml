@@ -7,7 +7,7 @@
 <div id="crud-bg">
     <h2 class="text-center text-white fw-bold display-3 pb-2 my-4 shadow">Crea Ricovero</h2>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Ricoveris", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -38,9 +38,9 @@
                             </div>
 
                             <div class="form-group row my-1">
-                                @Html.LabelFor(model => model.FotoAnimale, "Foto", htmlAttributes: new { @class = "col-md-4 col-form-label" })
+                                @Html.LabelFor(model => model.FotoAnimale, "Foto animale", htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.FotoAnimale, new { htmlAttributes = new { @class = "form-control", @placeholder = "Percorso immagine" } })
+                                    <input type="file" name="File" class="form-control" />
                                     @Html.ValidationMessageFor(model => model.FotoAnimale, "", new { @class = "text-danger" })
                                 </div>
                             </div>
