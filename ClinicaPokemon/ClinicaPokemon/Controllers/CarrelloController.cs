@@ -55,5 +55,38 @@ namespace ClinicaPokemon.Controllers
 
             return RedirectToAction("Index", "Prodotti");
         }
+
+        public ActionResult Delete(int? id)
+        {
+            var cart = Session["cart"] as List<Prodotti>;
+            if (cart != null)
+            {
+                var productToRemove = cart.FirstOrDefault(p => p.idProdotto == id);
+                if (productToRemove != null)
+                {
+                    if (productToRemove.Quantita > 1)
+                    {
+                        productToRemove.Quantita--;
+                    }
+                    else
+                    {
+                        cart.Remove(productToRemove);
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CartClear()
+        {
+            var cart = Session["cart"] as List<Prodotti>;
+            if (cart != null)
+            {
+                cart.Clear();
+            }
+            TempData["CreateMess"] = "Il carrello è stato svuotato";
+            return RedirectToAction("Index", "Prodotti");
+        }
     }
 }
