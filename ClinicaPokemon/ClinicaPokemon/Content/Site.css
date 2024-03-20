@@ -63,7 +63,7 @@ textarea {
 }
 
 
-#Home-footer {
+#Home-footer, #Armadietti-footer, #Cassetti-footer {
     background-color: #002171;
     letter-spacing: 2px;
     position: fixed;
@@ -72,7 +72,7 @@ textarea {
     right: 0;
 }
 
-#Animali-footer, #Ricoveris-footer, #Visite-footer {
+#Animali-footer, #Ricoveris-footer, #Visite-footer, #Prodotti-footer {
     background-color: #AE222B;
     letter-spacing: 2px;
     position: fixed;
@@ -81,11 +81,11 @@ textarea {
     right: 0;
 }
 
-#Home-navbar {
+#Home-navbar, #Armadietti-navbar, #Cassetti-navbar {
     background-color: #002171;
 }
 
-#Animali-navbar, #Ricoveris-navbar, #Visite-navbar {
+#Animali-navbar, #Ricoveris-navbar, #Visite-navbar, #Prodotti-navbar {
     background-color: #AE222B;
 }
 

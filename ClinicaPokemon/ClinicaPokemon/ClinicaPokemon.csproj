@@ -143,7 +143,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnimaliController.cs" />
+    <Compile Include="Controllers\ArmadiettiController.cs" />
+    <Compile Include="Controllers\CarrelloController.cs" />
+    <Compile Include="Controllers\CassettiController.cs" />
+    <Compile Include="Controllers\DettagliVenditaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProdottiController.cs" />
     <Compile Include="Controllers\RicoverisController.cs" />
     <Compile Include="Controllers\VisiteController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,6 +168,8 @@
     <Compile Include="Models\Utenti.cs" />
     <Compile Include="Models\Vendite.cs" />
     <Compile Include="Models\Visite.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="obj\Release\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +207,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="obj\Release\ClinicaPokemon.csproj.AssemblyReference.cache" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -236,6 +244,27 @@
     <Content Include="Views\Ricoveris\Edit.cshtml" />
     <Content Include="Views\Ricoveris\Index.cshtml" />
     <Content Include="Views\Animali\CreateForUser.cshtml" />
+    <Content Include="Views\Armadietti\Create.cshtml" />
+    <Content Include="Views\Armadietti\Delete.cshtml" />
+    <Content Include="Views\Armadietti\Details.cshtml" />
+    <Content Include="Views\Armadietti\Edit.cshtml" />
+    <Content Include="Views\Armadietti\Index.cshtml" />
+    <Content Include="Views\Carrello\Index.cshtml" />
+    <Content Include="Views\Cassetti\Create.cshtml" />
+    <Content Include="Views\Cassetti\Delete.cshtml" />
+    <Content Include="Views\Cassetti\Details.cshtml" />
+    <Content Include="Views\Cassetti\Edit.cshtml" />
+    <Content Include="Views\Cassetti\Index.cshtml" />
+    <Content Include="Views\DettagliVendita\Create.cshtml" />
+    <Content Include="Views\DettagliVendita\Delete.cshtml" />
+    <Content Include="Views\DettagliVendita\Details.cshtml" />
+    <Content Include="Views\DettagliVendita\Edit.cshtml" />
+    <Content Include="Views\DettagliVendita\Index.cshtml" />
+    <Content Include="Views\Prodotti\Create.cshtml" />
+    <Content Include="Views\Prodotti\Delete.cshtml" />
+    <Content Include="Views\Prodotti\Details.cshtml" />
+    <Content Include="Views\Prodotti\Edit.cshtml" />
+    <Content Include="Views\Prodotti\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

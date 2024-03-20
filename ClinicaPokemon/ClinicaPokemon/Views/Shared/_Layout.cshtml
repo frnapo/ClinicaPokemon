@@ -32,15 +32,19 @@
             <div>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
-                        @if (User.IsInRole("Utente"))
+                        @if (User.IsInRole("Utente") || User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Anagrafa", "CreateForUser", "Animali", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
+                            <li>@Html.ActionLink("Acquista", "Index", "Prodotti", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
                         }
-                        @if (User.IsInRole("Veterinario"))
+                        @if (User.IsInRole("Veterinario") || User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Pokédex", "Index", "Animali", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
                         }
-
+                        @if (User.IsInRole("Dottore") || User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Farmacia", "Index", "Armadietti", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
+                        }
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li>@Html.ActionLink("Registrati", "Register", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
