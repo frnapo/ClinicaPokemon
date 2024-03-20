@@ -1,0 +1,57 @@
+﻿@model ClinicaPokemon.Models.Animali
+
+@{
+    ViewBag.Title = "FindYourPokemon";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div id="second-bg" class="bg-white bg-opacity-10 shadow text-white pb-2">
+
+    <h2 class="text-center fw-bold display-3 pb-2 my-4 shadow text-white">Find Your Pokemon!</h2>
+
+    <div class="container d-flex flex-column" style="padding-bottom: 115px">
+        <div class="Row d-flex justify-content-center">
+            <div class="col-6 d-flex flex-column align-content-center">
+
+                <div class="form-horizontal text-center">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group text-center">
+
+                        <p class="text-white">Inserisci Il Numero Chip</p>
+                        <div class="mx-auto col-6 text-center">
+                            @Html.EditorFor(model => model.NrMicro, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NrMicro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group text-center">
+                    <div class="mx-auto col-6 text-center">
+                        <input type="submit" id="Find" value="Find Them" class="mx-auto fs-4 bg-transparent nav-link rounded-pill p-2 px-3 my-5 w-100 bg-transparent mt-3" />
+                    </div>
+                </div>
+
+                <div class="p-3 text-center">
+                    <p id="IsNotFound" class="text-danger d-none"> Questo pokemon non è nella nostra struttura! </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+ }
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/Script/CustomizeScript/FoundYourPokemon")
+    }

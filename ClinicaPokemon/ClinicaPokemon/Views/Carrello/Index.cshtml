@@ -1,44 +1,52 @@
-﻿
+﻿@model IEnumerable<ClinicaPokemon.Models.Prodotti>
 
-<div class="container" style="padding-bottom: 180px;">
-    <h2 class="text-center carrello-title text-white text-center fw-bold display-3 pb-2 my-4 shadow">Il Tuo Carrello</h2>
+@{
+    ViewBag.Title = "Index";
+}
 
-    <div class="row mt-4">
-        <div class="col-lg-8">
-            @foreach (var item in Model)
-            {
-                <div class="pokemon-card mb-3 p-3 d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                        <img src="~/Content/img/@item.Immagine" alt="@item.NomeProdotto" style="width: 50px; height: 100%;">
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h5>@item.NomeProdotto</h5>
-                        <p>Quantità: @item.Quantita</p>
-                    </div>
-                    <div>
-                        @Html.ActionLink("Rimuovi", "Delete", new { id = item.idProdotto }, new { @class = "btn btn-outline-danger" })
-                    </div>
-                </div>
-            }
-            <div class="text-center mt-3">
-                @Html.ActionLink("Svuota Carrello", "CartClear", null, new { @class = "btn btn-pokemon" })
-            </div>
-        </div>
+<h2>Index</h2>
 
-        <div class="col-lg-4 mt-5 mt-lg-0">
-            <div class="order-summary p-4">
-                <h3 class="fw-bold text-center">Riepilogo Ordine</h3>
-                <hr class="my-3">
-                @foreach (var item in Model)
-                {
-                    <p>@item.Quantita x @item.NomeProdotto</p>
-                }
-                <p class="fw-bold">Totale: Gratis!</p>
-                @using (Html.BeginForm("Order", "Carrello", FormMethod.Post))
-                {
-                    <input type="submit" class="btn btn-pokemon w-100 mt-3" value="Effettua Ordine">
-                }
-            </div>
-        </div>
-    </div>
-</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeProdotto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantita)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeProdotto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantita)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idProdotto }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idProdotto }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idProdotto })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@using (Html.BeginForm("Order", "Carrello", FormMethod.Post))
+{
+    <input type="submit" value="Effettua Ordine" />
+}
+

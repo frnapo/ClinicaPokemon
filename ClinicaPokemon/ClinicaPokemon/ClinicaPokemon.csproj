@@ -143,7 +143,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnimaliController.cs" />
-    <Compile Include="Controllers\ArenaController.cs" />
     <Compile Include="Controllers\ArmadiettiController.cs" />
     <Compile Include="Controllers\CarrelloController.cs" />
     <Compile Include="Controllers\CassettiController.cs" />
@@ -199,23 +198,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\img\Ananas.png" />
-    <Content Include="Content\img\Arancia.png" />
-    <Content Include="Content\img\Brucia.png" />
-    <Content Include="Content\img\Caramella.png" />
-    <Content Include="Content\img\Cedro.png" />
-    <Content Include="Content\img\Confuso.png" />
-    <Content Include="Content\img\Depressione.png" />
-    <Content Include="Content\img\Gelo.png" />
-    <Content Include="Content\img\logopoke.png" />
-    <Content Include="Content\img\Mela.png" />
-    <Content Include="Content\img\Paralisi.png" />
-    <Content Include="Content\img\Pesca.png" />
-    <Content Include="Content\img\Repellente.png" />
-    <Content Include="Content\img\sfondoProdotti.jpg" />
-    <Content Include="Content\img\Sonno.png" />
-    <Content Include="Content\img\Steroidi.png" />
-    <Content Include="Content\img\Veleno.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -227,6 +209,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="obj\Release\ClinicaPokemon.csproj.AssemblyReference.cache" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\CustomizeScript\FoundYourPokemon.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -283,7 +266,8 @@
     <Content Include="Views\Prodotti\Details.cshtml" />
     <Content Include="Views\Prodotti\Edit.cshtml" />
     <Content Include="Views\Prodotti\Index.cshtml" />
-    <Content Include="Views\Arena\Index.cshtml" />
+    <Content Include="Views\Home\FindYourPokemon.cshtml" />
+    <Content Include="Views\Animali\DettagliPokemon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

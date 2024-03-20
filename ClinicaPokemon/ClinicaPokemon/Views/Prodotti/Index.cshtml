@@ -3,10 +3,18 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    .sfondo {
+         background: url('@Url.Content("~/Content/img/sfondoProdotti.jpg")');
+         
+    }
+</style>
+
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
+<div class="sfondo">
     <div class="container" style="padding-bottom: 150px;">
 
         <div class="row">
@@ -48,5 +56,6 @@
             }
         </div>
     </div>
+</div>
 
 

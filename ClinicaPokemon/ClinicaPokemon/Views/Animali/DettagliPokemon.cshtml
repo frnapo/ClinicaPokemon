@@ -1,0 +1,104 @@
+﻿@model ClinicaPokemon.Models.Animali
+
+@{
+    ViewBag.Title = "DettagliPokemon";
+}
+
+<h2>DettagliPokemon</h2>
+
+<div>
+    <h4>Pokemon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Utenti.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utenti.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataRegistrazione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataRegistrazione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Immagine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Immagine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipologia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipologia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Colore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNascita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataNascita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NrMicro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NrMicro)
+        </dd>
+
+        @*E ricoverato?*@
+
+        @foreach (ClinicaPokemon.Models.Ricoveri ricoveri in Model.Ricoveri)
+        {
+
+            <dt>
+                @Html.DisplayNameFor(model => ricoveri.FotoAnimale)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => ricoveri.FotoAnimale)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => ricoveri.Attivo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => ricoveri.Attivo)
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idAnimale }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

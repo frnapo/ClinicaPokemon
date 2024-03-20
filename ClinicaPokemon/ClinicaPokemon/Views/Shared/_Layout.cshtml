@@ -32,10 +32,6 @@
             <div>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
-                        @if (User.IsInRole("Admin") || User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Arena", "Index", "Arena", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                        }
                         @if (User.IsInRole("Utente") || User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Anagrafa", "CreateForUser", "Animali", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>

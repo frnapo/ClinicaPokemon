@@ -88,9 +88,6 @@ namespace ClinicaPokemon.Controllers
             return View(animali);
         }
 
-
-
-
         [Authorize(Roles = "Veterinario, Admin")]
         public ActionResult Edit(int? id)
         {
@@ -110,6 +107,7 @@ namespace ClinicaPokemon.Controllers
         // POST: Animali/Edit/5
         // Per la protezione da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idAnimale,Nome,Tipologia,Colore,DataNascita,Microchip,NrMicro,FK_idUtente, Immagine")] Animali animali)
@@ -133,5 +131,42 @@ namespace ClinicaPokemon.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //  - CERCA POKEMON DAL CHIP -  //
+
+        #region FindYourPokemonChip
+
+        [AllowAnonymous]
+        public ActionResult FindYourPokemonChip(string chip)
+        {
+            var animale = db.Animali
+                .Include(a => a.Ricoveri)
+                .FirstOrDefault(a => a.NrMicro == chip);
+
+            if (animale == null)
+            {
+                return Json(0); // Animale non trovato
+            }
+
+            return Json(animale);
+        }
+
+        public ActionResult DettagliPokemon(int id)
+        {
+            var animale = db.Animali
+                .Include(a => a.Ricoveri)
+                .FirstOrDefault(a => a.idAnimale == id);
+
+            if (animale == null)
+            {
+                return HttpNotFound(); // Animale non trovato, restituisci codice di stato HTTP 404
+            }
+
+            return View(animale);
+        }
+
+        #endregion
+
+        //  -------------------------  //
     }
 }
