@@ -284,6 +284,7 @@
     <Content Include="Views\Prodotti\Edit.cshtml" />
     <Content Include="Views\Prodotti\Index.cshtml" />
     <Content Include="Views\Arena\Index.cshtml" />
+    <Content Include="Views\Animali\FindYourPokemon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

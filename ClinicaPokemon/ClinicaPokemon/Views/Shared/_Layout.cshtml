@@ -15,51 +15,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand navbar-dark shadow" id="@(ViewContext.RouteData.Values["controller"] + "-navbar")">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow" id="@(ViewContext.RouteData.Values["controller"] + "-navbar")">
+        <div class="container-fluid mx-3">
+            <div class="navbar-brand mx-auto">
+                <a href="@Url.Action("Index", "Home", new { area = "" })">
+                    <img src="~/Content/assets/img/logo2.png" alt="logo" width="80" class="ms-4 ms-lg-0">
+                </a>
+            </div>
 
-        <div class="container d-flex justify-content-between">
-            <div>
-                <ul class="navbar-nav">
-                    <li class="">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                    <li class="">@Html.ActionLink("Ricerca", "Index", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white" })</li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    <li>@Html.ActionLink("Ricerca", "FindYourPokemon", "Animali", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    @if (User.IsInRole("Utente") || User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Anagrafa", "CreateForUser", "Animali", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                        <li>@Html.ActionLink("Acquista", "Index", "Prodotti", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
+                    @if (User.IsInRole("Veterinario") || User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Pokédex", "Index", "Animali", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
+                    @if (User.IsInRole("Dottore") || User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Farmacia", "Index", "Armadietti", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Registrati", "Register", "Home", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
                 </ul>
-            </div>
-
-            <div class="mx-auto">
-                <img src="~/Content/assets/img/logo.png" class="ms-3" alt="logo" width="200" />
-            </div>
-
-            <div>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto d-flex align-items-center">
-                        @if (User.IsInRole("Admin") || User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Arena", "Index", "Arena", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                        }
-                        @if (User.IsInRole("Utente") || User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Anagrafa", "CreateForUser", "Animali", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                            <li>@Html.ActionLink("Acquista", "Index", "Prodotti", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                        }
-                        @if (User.IsInRole("Veterinario") || User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Pokédex", "Index", "Animali", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                        }
-                        @if (User.IsInRole("Dottore") || User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Farmacia", "Index", "Armadietti", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                        }
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Registrati", "Register", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white me-3" })</li>
-                            <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white" })</li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "fs-5 nav-link rounded-pill px-4 py-1 border border-1 border-white" })</li>
-                        }
-                    </ul>
-                </div>
             </div>
         </div>
     </nav>
@@ -68,8 +62,9 @@
     </div>
 
     <footer id="@(ViewContext.RouteData.Values["controller"] + "-footer")">
-        <p class="p-5 pb-0 text-center text-white m-0">PokémonCenter - Tutti i diritti riservati</p>
-        <p class="pb-5 text-center text-white m-0">© 2024 - TeamRocket Epicode</p>
+        <p class="p-4 pb-0 text-center text-white m-0">PokémonCenter - Tutti i diritti riservati</p>
+        <p class="pb-0 text-center text-white m-0">© 2024 - TeamRocket Epicode</p>
+        <p class="pb-4 pt-0 text-center text-white m-0">@Html.ActionLink("Accedi all'Arena", "Index", "Arena", new { area = "" }, new { @class = "text-decoration-none text-white" })</p>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

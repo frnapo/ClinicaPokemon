@@ -29,6 +29,9 @@ textarea {
     background-color: aliceblue !important;
 }
 
+.navbar {
+    z-index: 1000;
+}
 
 #heading {
     filter: drop-shadow(1px, 2px, 1px, black);
@@ -36,14 +39,13 @@ textarea {
 
 #title {
     color: white;
-    position: absolute;
+    position: fixed;
     font-family: "Bai Jamjuree", sans-serif;
     font-weight: 700 !important;
     font-style: italic;
     top: 45%;
     left: 50%;
-    right: -10%;
-    transform: translate(-80%, -50%);
+    transform: translate(-90%, -50%);
 }
 
 
@@ -57,8 +59,8 @@ textarea {
 #background {
     background: url('/Content/assets/img/background.jpeg') no-repeat center center fixed;
     background-size: cover;
-    height: 89vh;
-    padding-top: 1px;
+    height: 85vh;
+    padding-top: 30px;
     position: relative;
 }
 
@@ -187,9 +189,10 @@ textarea {
     background: url('/Content/assets/img/second-bg.jpeg') no-repeat center center fixed;
     background-size: cover;
     position: absolute;
-    top: 113.5px;
+    top: 105px;
     bottom: 0;
     width: 100%;
+    z-index: -1;
 }
 
 

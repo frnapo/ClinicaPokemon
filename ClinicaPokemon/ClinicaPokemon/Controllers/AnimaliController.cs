@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -207,6 +208,36 @@ namespace ClinicaPokemon.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        public ActionResult FindYourPokemon()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> FindYourPokemon(string NrMicro)
+        {
+            var pokemon = await db.Animali
+                .Select(a => new
+                {
+                    a.idAnimale,
+                    a.Nome,
+                    a.Tipologia,
+                    a.Colore,
+                    a.DataNascita,
+                    a.Microchip,
+                    a.NrMicro,
+                    a.FK_idUtente,
+                    a.DataRegistrazione,
+                    a.Immagine
+                })
+                .FirstOrDefaultAsync(a => a.NrMicro == NrMicro);
+            if (pokemon == null)
+            {
+                return Json(new { success = false, message = "Questo pokemon non è nella nostra struttura!" });
+            }
+            return Json(new { success = true, message = "Il tuo pokemon è nella nostra struttura!", data = pokemon });
         }
     }
 }
