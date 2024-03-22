@@ -1,11 +1,14 @@
 ﻿using ClinicaPokemon.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
 {
+    [Authorize(Roles = "Admin, Dottore")]
     public class DettagliVenditaController : Controller
     {
         private ClinicaDbContext db = new ClinicaDbContext();
@@ -127,6 +130,37 @@ namespace ClinicaPokemon.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        // GET: DettagliVendita/ProdottiVendutiInData
+        [HttpGet]
+
+        public async Task<ActionResult> ProdottiPerData(DateTime DataVendita)
+        {
+            var search = await db.DettagliVendita
+                .Include(v => v.Vendite)
+                .Include(v => v.Prodotti)
+                .Include(v => v.FK_idVendita)
+                .Where(v => v.Vendite.DataVendita == DataVendita)
+                .Select(v => new { v.Prodotti.NomeProdotto, v.Vendite.DataVendita, v.FK_idVendita })
+                .ToListAsync();
+
+            return Json(search, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: DettagliVendita/ProdottiPerCodFiscale
+        [HttpGet]
+        public async Task<ActionResult> ProdottiPerCodFiscale(string codFiscale)
+        {
+            var search = await db.DettagliVendita
+                .Include(d => d.Vendite)
+                .Include(d => d.Vendite.Utenti)
+                .Include(d => d.Prodotti)
+                .Where(d => d.Vendite.Utenti.CodFiscale == codFiscale)
+                .Select(d => new { d.Prodotti.NomeProdotto })
+                .ToListAsync();
+
+            return Json(search, JsonRequestBehavior.AllowGet);
         }
     }
 }

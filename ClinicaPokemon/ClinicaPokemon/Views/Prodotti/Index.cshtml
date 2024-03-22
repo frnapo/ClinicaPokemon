@@ -8,7 +8,7 @@
     .arm {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-</style>
+    </style>
 
 
 @*<p>
@@ -34,41 +34,104 @@
             }
         </p>
 
-            @foreach (var item in Model)
-            {
-                <div class="col-md-4 col-sm-6 ">
-                    <div class="card my-3 bg-white bg-opacity-75">
-                        <div class="card-header fw-bold">
-                            @Html.DisplayFor(modelItem => item.NomeProdotto)
-                        </div>
-                        <div class="card-body">
-                            <img src="~/Content/img/@item.Immagine" height="80" />
-                            <h5 class="card-title my-2">Ditta Fornitrice: @Html.DisplayFor(modelItem => item.DittaFornitrice.Nome)</h5>
-                            <p class="card-text fw-bold">Uso: @Html.DisplayFor(modelItem => item.UsoProdotti.Uso)</p>
-                            @*<p class="card-text">Medicinale: @Html.DisplayFor(modelItem => item.Tipo)</p>*@
-                            @if (item.Tipo)
-                            {
-                                <p class="card-text fw-bold">Tipo: Alimento</p>
-                            }
-                            else
-                            {
-                                <p class="card-text fw-bold">Tipo: Medicinale</p>
-                            }
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <div class="sfondo">
+        <div class="container" style="padding-bottom: 150px;">
 
-                            @*<a href="@Url.Action("Edit", "Edit", new { id = item.idProdotto })" class="card-link">Edit</a>*@
-                            @*<a href="@Url.Action("Delete", "Delete", new { id = item.idProdotto })" class="card-link">Delete</a>*@
-                            @using (Html.BeginForm("AddToCart", "Prodotti", FormMethod.Post, new { @class = "d-inline" }))
-                            {
-                                @Html.Hidden("id", item.idProdotto)
-                                <input type="submit" value="Aggiungi al carrello" class="btn btn-warning" />
-                                <input id="Quantita" type="number" name="quantita" value="1" min="1" max="5" class="form-control w-auto d-inline" />
-                            }
+            <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="locationModalLabel">Posizione del Prodotto</h5>
+                            @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>*@
                         </div>
+                        <div class="modal-body">
+                            <p id="armadietto"></p>
+                            <p id="cassetto"></p>
+                        </div>
+                        @*<div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                            </div>*@
                     </div>
                 </div>
+            </div>
 
-            }
+
+            <div class="row">
+                <h2 class="text-center text-dark fw-bold display-4 pb-2 my-4 shadow">Poke-Shop</h2>
+                <p class="mb-0">@Html.ActionLink("Carrello 🛒", "Index", "Carrello", new { area = "" }, new { @class = "btn btn-warning" })</p>
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-6 ">
+                        <div class="card my-3 bg-white bg-opacity-75">
+                            <div class="card-header fw-bold d-flex justify-content-between">
+                                @Html.DisplayFor(modelItem => item.NomeProdotto)
+
+                                @if (User.IsInRole("Admin") || User.IsInRole("Dottore"))
+                                {
+                                    <button class="btn btn-primary show-location" data-id="@item.idProdotto">Mostra Posizione</button>
+                                }
+
+                            </div>
+                            <div class="card-body">
+                                <img src="~/Content/img/@item.Immagine" height="80" />
+                                <h5 class="card-title my-2">Ditta Fornitrice: @Html.DisplayFor(modelItem => item.DittaFornitrice.Nome)</h5>
+                                <p class="card-text fw-bold">Uso: @Html.DisplayFor(modelItem => item.UsoProdotti.Uso)</p>
+                                @*<p class="card-text">Medicinale: @Html.DisplayFor(modelItem => item.Tipo)</p>*@
+                                @if (item.Tipo)
+                                {
+                                    <p class="card-text fw-bold">Tipo: Alimento</p>
+                                }
+                                else
+                                {
+                                    <p class="card-text fw-bold">Tipo: Medicinale</p>
+                                }
+
+                                @*<a href="@Url.Action("Edit", "Edit", new { id = item.idProdotto })" class="card-link">Edit</a>*@
+                                @*<a href="@Url.Action("Delete", "Delete", new { id = item.idProdotto })" class="card-link">Delete</a>*@
+                                @using (Html.BeginForm("AddToCart", "Prodotti", FormMethod.Post, new { @class = "d-inline" }))
+                                {
+                                    @Html.Hidden("id", item.idProdotto)
+                                    <input type="submit" value="Aggiungi al carrello" class="btn btn-warning" />
+                                    <input id="Quantita" type="number" name="quantita" value="1" min="1" max="5" class="form-control w-auto d-inline" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
         </div>
     </div>
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $(".show-location").click(function () {
+                    var id = $(this).data("id");
+                    $.ajax({
+                        url: "/Prodotti/ShowLocation", 
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.success) {
+                                $("#armadietto").text("Armadietto: " + data.location.Armadietto);
+                                $("#cassetto").text("Cassetto: " + data.location.Cassetto);
+                                $("#locationModal").modal("show");
+                            } else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+                });
+            });
+
+        </script>
+    }
+    ```
+
+
 
 
