@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
 {
+    [Authorize(Roles = "Admin, Dottore")]
     public class DettagliVenditaController : Controller
     {
         private ClinicaDbContext db = new ClinicaDbContext();
@@ -131,32 +132,35 @@ namespace ClinicaPokemon.Controllers
             base.Dispose(disposing);
         }
         // GET: DettagliVendita/ProdottiVendutiInData
-        //public async Task<JsonResult> ProdottiVendutiInData(DateTime data)
-        //{
-        //    var venditeInData = await db.Vendite
-        //        .Include(v => v.DettagliVendita)
-        //        .Where(v => DbFunctions.TruncateTime(v.DataVendita) == DbFunctions.TruncateTime(data))
-        //        .ToListAsync();
+        [HttpGet]
 
-        //    var prodottiVenduti = new System.Collections.Generic.List<DettagliVendita>();
-
-        //    foreach (var vendita in venditeInData)
-        //    {
-        //        prodottiVenduti.AddRange(vendita.DettagliVendita);
-        //    }
-
-        //    return Json(prodottiVenduti, JsonRequestBehavior.AllowGet);
-        //}
-
-        public async Task<JsonResult> DataVendita(DateTime data)
+        public async Task<ActionResult> ProdottiPerData(DateTime DataVendita)
         {
-            var vendite = await db.Vendite
-                .Where(v => DbFunctions.TruncateTime(v.DataVendita) == DbFunctions.TruncateTime(data))
-                .Select(v => new { v.idVendita, v.DataVendita, v.DettagliVendita })
+            var search = await db.DettagliVendita
+                .Include(v => v.Vendite)
+                .Include(v => v.Prodotti)
+                .Include(v => v.FK_idVendita)
+                .Where(v => v.Vendite.DataVendita == DataVendita)
+                .Select(v => new { v.Prodotti.NomeProdotto, v.Vendite.DataVendita, v.FK_idVendita })
                 .ToListAsync();
 
-            return Json(vendite, JsonRequestBehavior.AllowGet);
+            return Json(search, JsonRequestBehavior.AllowGet);
         }
 
+
+        // GET: DettagliVendita/ProdottiPerCodFiscale
+        [HttpGet]
+        public async Task<ActionResult> ProdottiPerCodFiscale(string codFiscale)
+        {
+            var search = await db.DettagliVendita
+                .Include(d => d.Vendite)
+                .Include(d => d.Vendite.Utenti)
+                .Include(d => d.Prodotti)
+                .Where(d => d.Vendite.Utenti.CodFiscale == codFiscale)
+                .Select(d => new { d.Prodotti.NomeProdotto })
+                .ToListAsync();
+
+            return Json(search, JsonRequestBehavior.AllowGet);
+        }
     }
 }

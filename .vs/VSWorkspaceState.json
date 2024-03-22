@@ -8,6 +8,6 @@
     "\\ClinicaPokemon\\ClinicaPokemon\\Views",
     "\\ClinicaPokemon\\ClinicaPokemon\\Views\\DettagliVendita"
   ],
-  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Views\\DettagliVendita\\Index.cshtml",
+  "SelectedNode": "\\ClinicaPokemon\\ClinicaPokemon\\Controllers\\ProdottiController.cs",
   "PreviewInSolutionExplorer": false
 }

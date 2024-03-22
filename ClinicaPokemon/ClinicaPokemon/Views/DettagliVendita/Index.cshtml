@@ -1,23 +1,25 @@
 ﻿@model IEnumerable<ClinicaPokemon.Models.DettagliVendita>
-@using ClinicaPokemon.Models
+
 
 @{
     ViewBag.Title = "Index";
 }
 
 <div class="container">
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
+    <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="resultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Prodotti Venduti In Data</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title" id="resultsModalLabel">Prodotti Venduti</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body text-dark" id="modalContent">
-                    <!-- I dati verranno inseriti qui -->
+                <div class="modal-body" id="resultsBody">
+                    <!-- I risultati saranno inseriti qui -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
                 </div>
             </div>
         </div>
@@ -77,48 +79,104 @@
         }
 
     </table>
-    <input type="date" id="datePicker" class="form-control">
-    <button type="button" class="btn btn-primary" id="showModalButton">
-        Mostra Prodotti Venduti In Data
-    </button>
+
+    @*<input type="date" id="searchDate" name="searchDate" />
+        <input type="button" id="button" value="Cerca" />*@
+    <div class="col-sm-6">
+
+        <h3 class="text-white"> Cerca Vendite per data </h3>
+        <input class="form-control" type="date" id="search" placeholder="Cerca vendite per data" />
+        <button id="bottone" class="btn btn-primary my-3">Cerca</button>
+        <div id="result" class="d-none"></div>
+    </div>
+
+    <div class="col-sm-6">
+        <h3 class="text-white">Cerca per Codice Fiscale</h3>
+        <input class="form-control" type="text" id="codFiscale" placeholder="Cerca vendite per Codice Fiscale" />
+        <button id="bottoneCF" class="btn btn-primary my-3">Cerca</button>
+        <div id="resultCF" class="d-none"></div>
+    </div>
 
 
-    @section Scripts {
-        <script>
-                $(document).ready(function () {
-                    $('#showModalButton').click(function () {
-                        var selectedDate = $('#datePicker').val();
-                        if (selectedDate) {
-                            $.ajax({
-                                url: '@Url.Action("DataVendita", "DettagliVendita")',
-                                type: 'GET',
-                                data: { data: selectedDate },
-                                success: function (data) {
-                                    var content = '';
-                                    $.each(data, function (index, vendita) {
-                                        content += '<h5>Vendita ID: ' + vendita.idVendita + '</h5>';
-                                        content += '<p>Data Vendita: ' + vendita.DataVendita + '</p>';
-                                        $.each(vendita.DettagliVendita, function (index, dettagli) {
-                                            content += '<p>Prodotto ID: ' + dettagli.FK_idProdotto + ', Quantità: ' + dettagli.Quantita + '</p>';
-                                        });
-                                        content += '<hr />';
-                                    });
-                                    $('#modalContent').html(content);
-                                    $('#myModal').modal('show');
-                                },
-                                error: function () {
-                                    alert('Errore nel recupero dei dati.');
-                                }
-                            });
-                        } else {
-                            alert('Seleziona una data.');
-                        }
-                    });
-                });
-        </script>
-    }
+
 
 </div>
+@section Scripts{
+    <script>
+        const bottone = document.getElementById('bottone');
+        bottone.addEventListener('click', function () {
+            console.log("entra ? non entra")
+            const date = document.getElementById('search').value;
+            fetchMedicinaliPerData(date);
+        });
+        function fetchMedicinaliPerData(date) {
+            fetch("/DettagliVendita/ProdottiPerData?DataVendita=" + date)
+                .then(response => response.json())
+                .then(data => {
+                    const div = document.getElementById('result');
+                    data.forEach(e => {
+
+                        const asincrona = document.createElement('div');
+                        asincrona.innerHTML = `
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="d-flex">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Nome: ${e.NomeProdotto}</h5>
+                                                <p>ID Vendita: ${e.FK_idVendita}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>`;
+                        div.appendChild(asincrona);
+                    });
+                    div.classList.remove('d-none');
+                })
+                .catch(error => console.error("Errore nel reperimento dati: ", error));
+        };
+
+
+        const bottoneCF = document.getElementById('bottoneCF');
+        bottoneCF.addEventListener('click', function () {
+            console.log("entra ? non entra")
+            const CF = document.getElementById('codFiscale').value;
+          
+            fetchMedicinaliPerCF(CF);
+            console.log(CF);
+        });
+        function fetchMedicinaliPerCF(CF) {
+            fetch("/DettagliVendita/ProdottiPerCodFiscale?codFiscale=" + CF)
+                .then(response => response.json())
+                .then(data => {
+                    const div = document.getElementById('resultCF');
+                    console.log(data);
+                    data.forEach(e => {
+                        const asincrona = document.createElement('div');
+                        asincrona.innerHTML = `
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="d-flex">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Nome: ${e.NomeProdotto}</h5>
+                                              </div>
+                                        </div>
+                                   </div>`;
+
+                        div.appendChild(asincrona);
+                    });
+                    div.classList.remove('d-none');
+                })
+        
+                .catch(error => console.error("Errore nel reperimento dati: ", error));
+                };
+
+    </script>
+
+}
+```
+
+
+
+
+
 
 
 
