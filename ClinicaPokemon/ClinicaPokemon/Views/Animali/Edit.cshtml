@@ -4,13 +4,19 @@
     ViewBag.Title = "Edit";
 }
 
+<style>
+    .arm {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+</style>
+
 <div id="crud-bg">
 
 
     @using (Html.BeginForm("Edit", "Animali", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        <h2 class="text-center text-white fw-bold display-3 pb-2 my-4 shadow">Modifica @Model.Nome</h2>
+        <h2 class="text-center text-white fw-bold display-3 pb-2 my-4 shadow arm">Modifica @Model.Nome</h2>
         <div class="container" style="padding-bottom: 170px">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -23,7 +29,7 @@
                             @Html.HiddenFor(model => model.idAnimale)
 
                             <div class="form-group row my-1">
-                                @Html.LabelFor(model => model.FK_idUtente, "FK_idUtente", htmlAttributes: new { @class = "col-md-4 col-form-label" })
+                                @Html.LabelFor(model => model.FK_idUtente, "Proprietario", htmlAttributes: new { @class = "col-md-4 col-form-label" })
                                 <div class="col-md-8">
                                     @Html.DropDownList("FK_idUtente", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.FK_idUtente, "", new { @class = "text-danger" })

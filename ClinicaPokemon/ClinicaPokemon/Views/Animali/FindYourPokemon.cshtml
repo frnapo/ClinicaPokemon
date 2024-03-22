@@ -4,6 +4,11 @@
     ViewBag.Title = "FindYourPokemon";
 }
 
+<style>
+    .arm {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+</style>
 
 @using (Html.BeginForm())
 {
@@ -11,10 +16,10 @@
 
 <div class="container">
 
-    <h2 class="text-center fw-bold display-3 pb-2 mt-3 shadow text-dark">Find Your Pokemon!</h2>
+    <h2 class="text-center fw-bold display-3 pb-2 mt-3 shadow text-white arm">Find Your Pokemon!</h2>
     <p class="text-center px-5 mb-5 text-dark"><span class="fw-bold">Hai smarrito il tuo Pokemon?</span> Nessun problema, inserisci il numero chip e ti diremo se e' presente nella nostra struttura!</p>
 
-    <div class="container d-flex flex-column" style="padding-bottom: 115px">
+    <div class="container d-flex flex-column rounded-3">
         <div class="Row d-flex justify-content-center">
             <div class="col-6 d-flex flex-column align-content-center">
 
@@ -35,18 +40,18 @@
 
                 <div class="form-group text-center">
                     <div class="mx-auto col-6 text-center">
-                        <input type="submit" id="Find" value="Cerca" class="mx-auto fs-4 nav-link rounded-pill p-2 px-3 my-5 w-100 bg-white bg-opacity-25 mt-3" />
+                        <input type="submit" id="Find" value="Cerca" class="mx-auto fs-4 text-dark nav-link rounded-pill p-2 px-3 my-5 w-100 bg-white bg-opacity-25 mt-3" />
                     </div>
                 </div>
 
-                <div class="p-3 text-center">
-                    <p id="IsNotFound" class="text-danger d-none"> Questo pokemon non è nella nostra struttura! </p>
-                </div>
+                <div id="pokemonDetails"></div>
 
+                <div class="text-center">
+                    <p id="IsNotFound" class="text-danger fw-bold d-none"> Questo pokemon non è nella nostra struttura! </p>
+                </div>
             </div>
         </div>
     </div>
-    <div id="pokemonDetails"></div>
 </div>
 
 }
@@ -69,16 +74,16 @@
                         if (response.success) {
                             var pokemon = response.data;
                             var html = `
-                                <p>Id: ${pokemon.idAnimale}</p>
-                                <p>Nome: ${pokemon.Nome}</p>
-                                <p>Tipologia: ${pokemon.Tipologia}</p>
-                                <p>Colore: ${pokemon.Colore}</p>
-                                <p>Data di Nascita: ${pokemon.DataNascita}</p>
-                                <p>Microchip: ${pokemon.Microchip}</p>
-                                <p>Numero Microchip: ${pokemon.NrMicro}</p>
-                                <p>Id Utente: ${pokemon.FK_idUtente}</p>
-                                <p>Data di Registrazione: ${pokemon.DataRegistrazione}</p>
-                                <p>Immagine: <img src="${pokemon.Immagine}" alt="Immagine Pokemon"></p>
+                            <div class="card mx-auto my-3" style="width: 18rem; background-color: rgba(255, 255, 255, 0.7); border-radius: 20px;">
+                                <img src="${pokemon.Immagine}" class="card-img-top" alt="Immagine Pokemon" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                                <div class="card-body pt-0 text-center">
+                                    <h5 class="card-title fw-bold">${pokemon.Nome}</h5>
+                                    <p class="card-text">Tipologia: ${pokemon.Tipologia} - Colore: ${pokemon.Colore}</p>
+                                    <div class="alert alert-success" role="alert">
+                                        Il tuo Pokémon è sano e salvo da qualche parte :).
+                                    </div>
+                                </div>
+                            </div>
                             `;
                             $('#pokemonDetails').html(html);
                         } else {
@@ -89,7 +94,6 @@
                     error: function () {
                         alert('Si è verificato un errore durante la ricerca del tuo Pokémon.');
                     }
-
                 });
                 return false;
             });

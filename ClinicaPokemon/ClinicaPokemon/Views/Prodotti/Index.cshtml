@@ -4,14 +4,36 @@
     ViewBag.Title = "Index";
 }
 
+<style>
+    .arm {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+</style>
+
+
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
     <div class="container" style="padding-bottom: 150px;">
 
         <div class="row">
-            <h2 class="text-center text-dark fw-bold display-4 pb-2 my-4 shadow">Poke-Shop</h2>
-            <p class="mb-0">@Html.ActionLink("Carrello 🛒", "Index", "Carrello", new { area = "" }, new { @class = "btn btn-warning" })</p>
+            <h2 class="text-center text-white arm fw-bold display-4 pb-2 my-4 shadow">Poke-Shop</h2>
+            @{
+                var cart = Session["cart"] as List<ClinicaPokemon.Models.Prodotti>;
+                var cartItemCount = cart?.Sum(item => item.Quantita) ?? 0;
+            }
+
+        <p class="mb-0">
+            @if (User.IsInRole("Utente"))
+            {
+                @Html.ActionLink("Carrello 🛒", "Index", "Carrello", new { area = "" }, new { @class = "btn btn-warning" })
+                if (cartItemCount > 0)
+                {
+                    <span class="badge bg-danger">@cartItemCount</span>
+                }
+            }
+        </p>
+
             @foreach (var item in Model)
             {
                 <div class="col-md-4 col-sm-6 ">

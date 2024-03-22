@@ -151,6 +151,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdottiController.cs" />
     <Compile Include="Controllers\RicoverisController.cs" />
+    <Compile Include="Controllers\UtentisController.cs" />
     <Compile Include="Controllers\VisiteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -285,6 +286,7 @@
     <Content Include="Views\Prodotti\Index.cshtml" />
     <Content Include="Views\Arena\Index.cshtml" />
     <Content Include="Views\Animali\FindYourPokemon.cshtml" />
+    <Content Include="Views\Utentis\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

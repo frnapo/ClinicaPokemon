@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ClinicaPokemon.Models.Utenti>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .arm {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .list-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .header-row {
+        background-color: #343a40;
+        color: #fff;
+        padding: 12px 0;
+        text-align: center;
+    }
+
+    .item-row {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding: 12px 0;
+        transition: background-color 0.3s ease;
+    }
+
+        .item-row:hover {
+            background-color: #f8f9fa;
+        }
+
+    .item-column {
+        flex: 1;
+        text-align: center;
+    }
+
+    .btn-custom {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+    .action-buttons {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .action-button {
+        width: 25%;
+        min-width: 100px; 
+    }
+</style>
+
+<div class="container list-container mt-3" style="padding-bottom: 120px;">
+
+    <div class="row header-row">
+        <div class="col-3 ">Username</div>
+        <div class="col-3">Cognome</div>
+        <div class="col-4">CodFiscale</div>
+        <div class="col-2 text-center">Ruolo</div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="row item-row">
+            <div class="col-3 item-column">@Html.DisplayFor(modelItem => item.Username)</div>
+            <div class="col-3 item-column">@Html.DisplayFor(modelItem => item.Cognome)</div>
+            <div class="col-4 item-column">@Html.DisplayFor(modelItem => item.CodFiscale)</div>
+            <div class="col-2 item-column">
+                @{
+                    string ruolo = "";
+                    switch (item.Ruolo)
+                    {
+                        case 1:
+                            ruolo = "Utente";
+                            break;
+                        case 2:
+                            ruolo = "Veterinario";
+                            break;
+                        case 3:
+                            ruolo = "Dottore";
+                            break;
+                        case 4:
+                            ruolo = "Admin";
+                            break;
+                    }
+                }
+                @ruolo
+            </div>
+            <div class="col-12 d-flex action-buttons my-2">
+                @Html.ActionLink("Declassa", "Declassa", new { id = item.idUtente }, new { @class = "btn btn-custom btn-dark action-button" })
+                @Html.ActionLink("Promuovi", "Promuovi", new { id = item.idUtente }, new { @class = "btn btn-custom btn-info action-button" })
+            </div>
+        </div>
+    }
+
+</div>

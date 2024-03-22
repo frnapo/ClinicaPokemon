@@ -19,7 +19,7 @@
         <div class="container-fluid mx-3">
             <div class="navbar-brand mx-auto">
                 <a href="@Url.Action("Index", "Home", new { area = "" })">
-                    <img src="~/Content/assets/img/logo2.png" alt="logo" width="80" class="ms-4 ms-lg-0">
+                    <img src="~/Content/assets/img/logo2.png" alt="logo" width="80" class="ms-5 ms-lg-0">
                 </a>
             </div>
 
@@ -43,6 +43,10 @@
                     @if (User.IsInRole("Dottore") || User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Farmacia", "Index", "Armadietti", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
+                    @if  (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Utenti", "Index", "Utentis", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
                     }
                     @if (!User.Identity.IsAuthenticated)
                     {

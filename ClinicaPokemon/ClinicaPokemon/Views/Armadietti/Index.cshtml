@@ -5,39 +5,58 @@
 }
 
 <style>
-    .sfondo{
-        background-color: #002171;
+    .card:hover {
+        transform: scale(1.05);
     }
 
-    .custom-card {
-        
-        background: url('@Url.Content("~/Content/img/logopoke.png")') center center ;
-        background-size: contain;
-        background-repeat: no-repeat;
+    .numero-armadietto {
+        transition: transform .5s ease;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
+    .arm {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 </style>
 
 
-<div class="sfondo">
-    <div class="container ">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-6">
-                    <div class="card my-3 border-dark custom-card bg-white">
-                        <div class="card-body">
-                            <h5 class="card-title text-dark">Armadietto: @Html.DisplayFor(modelItem => item.NumeroArmadietto)</h5>
-                            <p class="card-text">
-
-                            </p>
-                            <a href="@Url.Action("Index", "Cassetti", new { FK_idArmadietto = item.idArmadietto })" class="btn btn-dark text-white">Prosegui su Cassetti</a>
-
+<div class="container">
+    <div class="row">
+        <h2 class="text-center text-white arm fw-bold display-3 pb-2 my-4 shadow">Armadietti</h2>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 my-3">
+                <a href="@Url.Action("Index", "Cassetti", new { FK_idArmadietto = item.idArmadietto })">
+                    <div class="card border-0 bg-transparent" style="cursor: pointer; transition: transform .3s;">
+                        <div class="card-body text-center">
+                            <div class="armadietto-img position-relative" style="background: url('/Content/assets/img/armadietto-closed.png') no-repeat center center; background-size: contain; height: 200px;">
+                                <span class="numero-armadietto position-absolute" style="top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); transition: transform .5s ease;">@Html.Raw("Armadietto " + Html.DisplayFor(modelItem => item.NumeroArmadietto))</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                </a>
+            </div>
+        }
     </div>
 </div>
 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.armadietto-img').hover(
+            function () {
+                $(this).css('background-image', 'url("/Content/assets/img/armadietto-open.png")');
+                $(this).find('.numero-armadietto').css('transform', 'translate(-50%, -50%) scale(1)');
+            },
+            function () {
+                $(this).css('background-image', 'url("/Content/assets/img/armadietto-closed.png")');
+                $(this).find('.numero-armadietto').css('transform', 'translate(-50%, -50%) scale(0)');
+            }
+        );
+    });
+</script>

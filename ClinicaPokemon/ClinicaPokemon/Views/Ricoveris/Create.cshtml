@@ -55,9 +55,13 @@
 
                             <div class="form-group row my-1">
                                 @Html.LabelFor(model => model.Attivo, "Stato", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-12">
+                                <div class="col-md-8 ms-auto">
                                     <div class="checkbox">
-                                        @Html.EditorFor(model => model.Attivo)
+                                        @Html.DropDownListFor(model => model.Attivo, new SelectList(new[]
+                                        {
+                                            new { Value = "true", Text = "Attivo" },
+                                            new { Value = "false", Text = "Chiuso" }
+                                        }, "Value", "Text"), new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Attivo, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

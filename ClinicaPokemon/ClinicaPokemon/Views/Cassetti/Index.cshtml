@@ -5,9 +5,6 @@
 }
 
 <style>
-    .sfondo{
-        background-color: #002171;
-    }
 
     .custom-card {
 
@@ -16,27 +13,26 @@
         background-repeat: no-repeat;
     }
 
+    .arm {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
 </style>
 
-<div class="sfondo">
-    <div class="container">
-        <div class="row ">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-6 ">
-                    <div class="card border-dark my-3 custom-card  bg-white">
-                        <div class="card-body ">
-                            <h5 class="card-title text-dark">Cassetto: @Html.DisplayFor(modelItem => item.NumeroCassetto)</h5>
-
-                            @*<a href="@Url.Action("Edit", "YourController", new { id=item.idCassetto })" class="card-link">Modifica</a>
-                                <a href="@Url.Action("Details", "YourController", new { id=item.idCassetto })" class="card-link">Dettagli</a>
-                                <a href="@Url.Action("Delete", "YourController", new { id=item.idCassetto })" class="card-link">Elimina</a>*@
-                            <a href="@Url.Action("Index", "Prodotti", new { id=item.idCassetto })" class="btn btn-dark text-white">Visualizza Prodotti</a>
-                        </div>
+<div class="container">
+    <div class="row">
+        <h2 class="text-center text-white arm fw-bold display-3 pb-2 my-4 shadow">Cassetti</h2>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="card border-0 bg-black bg-transparent my-3 custom-card bg-white text-center d-flex flex-column justify-content-center align-items-center">
+                    <div class="card-body">
+                        <h5 class="card-title text-white arm fw-bold">Armadietto @Request.QueryString["FK_idArmadietto"] Cassetto @Html.DisplayFor(modelItem => item.NumeroCassetto)</h5>
+                        <a href="@Url.Action("Index", "Prodotti", new { id=item.idCassetto })" class="btn btn-dark text-white">Visualizza Prodotti</a>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
 </div>
 

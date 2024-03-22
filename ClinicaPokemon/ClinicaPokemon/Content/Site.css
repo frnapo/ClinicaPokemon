@@ -65,7 +65,7 @@ textarea {
 }
 
 
-#Home-footer, #Armadietti-footer, #Cassetti-footer {
+#Home-footer {
     background-color: #002171;
     letter-spacing: 2px;
     position: fixed;
@@ -74,7 +74,7 @@ textarea {
     right: 0;
 }
 
-#Animali-footer, #Ricoveris-footer, #Visite-footer, #Prodotti-footer, #Carrello-footer, #Arena-footer {
+#Animali-footer, #Ricoveris-footer, #Visite-footer, #Prodotti-footer, #Carrello-footer, #Arena-footer, #Cassetti-footer, #Armadietti-footer, #Utentis-footer {
     background-color: #AE222B;
     letter-spacing: 2px;
     position: fixed;
@@ -83,11 +83,11 @@ textarea {
     right: 0;
 }
 
-#Home-navbar, #Armadietti-navbar, #Cassetti-navbar {
+#Home-navbar {
     background-color: #002171;
 }
 
-#Animali-navbar, #Ricoveris-navbar, #Visite-navbar, #Prodotti-navbar, #Carrello-navbar, #Arena-navbar {
+#Animali-navbar, #Ricoveris-navbar, #Visite-navbar, #Prodotti-navbar, #Carrello-navbar, #Arena-navbar, #Cassetti-navbar, #Armadietti-navbar, #Utentis-navbar {
     background-color: #AE222B;
 }
 
