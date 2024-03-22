@@ -1,76 +1,182 @@
 ﻿@model IEnumerable<ClinicaPokemon.Models.DettagliVendita>
-@using ClinicaPokemon.Models
+
+
+<style>
+    .arm {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+</style>
+
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container" style="padding-bottom: 120px;">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Prodotti.NomeProdotto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prodotti.Tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prodotti.FK_idUsoProdotto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prodotti.FK_idDittaFornitrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prodotti.FK_idCassetto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prodotti.FK_idArmadietto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vendite.idVendita)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantita)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prodotti.NomeProdotto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prodotti.Tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prodotti.FK_idUsoProdotto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prodotti.FK_idDittaFornitrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prodotti.FK_idCassetto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prodotti.FK_idArmadietto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vendite.idVendita)
-        </td>
-        <td>
-            @Html.EditorFor(modelItem => item.Quantita)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idDettagli }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idDettagli }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idDettagli })
-        </td>
-    </tr>
+    <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="resultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultsModalLabel">Prodotti Venduti</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="resultsBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="text-center text-white fw-bold display-3 pb-2 my-4 shadow arm">Dettagli</h2>
+
+    <div class="d-flex justify-content-center mb-4">
+        <div class="me-5">
+            <h3 class="text-white arm">Vendite per data </h3>
+            <div class="d-flex">
+                <input class="form-control rounded-0 rounded-start" type="date" id="search" placeholder="Cerca vendite per data" />
+                <button id="bottone" class="btn btn-dark rounded-0 rounded-end">Cerca</button>
+            </div>
+            <div id="result" class="d-none"></div>
+        </div>
+
+        <div>
+            <h3 class="text-white arm">Vendite x CF</h3>
+            <div class="d-flex">
+                <input class="form-control rounded-0 rounded-start" type="text" id="codFiscale" placeholder="Cerca vendite per Codice Fiscale" />
+                <button id="bottoneCF" class="btn btn-dark rounded-0 rounded-end">Cerca</button>
+            </div>
+            <div id="resultCF" class="d-none"></div>
+        </div>
+    </div>
+
+    <table class="table text-dark bg-white bg-opacity-50 rounded-3">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Prodotti.NomeProdotto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prodotti.Tipo)
+            </th>
+
+            <th>
+                Numero Vendita
+            </th>
+            <th>
+                Quantita'
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prodotti.NomeProdotto)
+                </td>
+                @if (item.Prodotti.Tipo)
+                {
+                    <td class="card-text fw-bold">Alimento</td>
+                }
+                else
+                {
+                    <td class="card-text fw-bold">Medicinale</td>
+                }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vendite.idVendita)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantita)
+                </td>
+                <td>
+                    @Html.ActionLink("Elimina", "Delete", new { id = item.idDettagli }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
+
+
+</div>
+@section Scripts{
+    <script>
+        const bottone = document.getElementById('bottone');
+        bottone.addEventListener('click', function () {
+            console.log("entra ? non entra")
+            const date = document.getElementById('search').value;
+            fetchMedicinaliPerData(date);
+        });
+        function fetchMedicinaliPerData(date) {
+            fetch("/DettagliVendita/ProdottiPerData?DataVendita=" + date)
+                .then(response => response.json())
+                .then(data => {
+                    const div = document.getElementById('result');
+                    data.forEach(e => {
+
+                        const asincrona = document.createElement('div');
+                        asincrona.innerHTML = `
+                                <div class="mt-2 card bg-white bg-opacity-50 mb-3 shadow-sm" style="max-width: 540px; border-radius: 0.5rem; background-color: #f8f9fa;">
+                                    <div class="row g-0">
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title" style="color: #007bff;">${e.NomeProdotto}</h5>
+                                                <p class="card-text"><strong>ID Vendita:</strong> ${e.FK_idVendita}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                        div.appendChild(asincrona);
+                    });
+                    div.classList.remove('d-none');
+                })
+                .catch(error => console.error("Errore nel reperimento dati: ", error));
+        };
+
+
+        const bottoneCF = document.getElementById('bottoneCF');
+        bottoneCF.addEventListener('click', function () {
+            console.log("entra ? non entra")
+            const CF = document.getElementById('codFiscale').value;
+
+            fetchMedicinaliPerCF(CF);
+            console.log(CF);
+        });
+        function fetchMedicinaliPerCF(CF) {
+            fetch("/DettagliVendita/ProdottiPerCodFiscale?codFiscale=" + CF)
+                .then(response => response.json())
+                .then(data => {
+                    const div = document.getElementById('resultCF');
+                    console.log(data);
+                    data.forEach(e => {
+                        const asincrona = document.createElement('div');
+                        asincrona.innerHTML = `
+                                        <div class="mt-2 card bg-white bg-opacity-50 mb-3" style="max-width: 540px;">
+                                            <div class="d-flex">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Nome: ${e.NomeProdotto}</h5>
+                                                  </div>
+                                            </div>
+                                       </div>`;
+
+                        div.appendChild(asincrona);
+                    });
+                    div.classList.remove('d-none');
+                })
+
+                .catch(error => console.error("Errore nel reperimento dati: ", error));
+        };
+
+    </script>
+
 }
-
-</table>

@@ -1,7 +1,9 @@
 ﻿using ClinicaPokemon.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
@@ -10,14 +12,12 @@ namespace ClinicaPokemon.Controllers
     {
         private ClinicaDbContext db = new ClinicaDbContext();
 
-        // GET: DettagliVendita
         public ActionResult Index()
         {
             var dettagliVendita = db.DettagliVendita.Include(d => d.Prodotti).Include(d => d.Vendite);
             return View(dettagliVendita.ToList());
         }
 
-        // GET: DettagliVendita/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -32,7 +32,6 @@ namespace ClinicaPokemon.Controllers
             return View(dettagliVendita);
         }
 
-        // GET: DettagliVendita/Create
         public ActionResult Create()
         {
             ViewBag.FK_idProdotto = new SelectList(db.Prodotti, "idProdotto", "NomeProdotto");
@@ -40,9 +39,6 @@ namespace ClinicaPokemon.Controllers
             return View();
         }
 
-        // POST: DettagliVendita/Create
-        // Per la protezione da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idDettagli,FK_idProdotto,FK_idVendita,Quantita")] DettagliVendita dettagliVendita)
@@ -59,7 +55,6 @@ namespace ClinicaPokemon.Controllers
             return View(dettagliVendita);
         }
 
-        // GET: DettagliVendita/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,9 +71,6 @@ namespace ClinicaPokemon.Controllers
             return View(dettagliVendita);
         }
 
-        // POST: DettagliVendita/Edit/5
-        // Per la protezione da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idDettagli,FK_idProdotto,FK_idVendita,Quantita")] DettagliVendita dettagliVendita)
@@ -109,7 +101,6 @@ namespace ClinicaPokemon.Controllers
             return View(dettagliVendita);
         }
 
-        // POST: DettagliVendita/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -127,6 +118,35 @@ namespace ClinicaPokemon.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpGet]
+
+        public async Task<ActionResult> ProdottiPerData(DateTime DataVendita)
+        {
+            var search = await db.DettagliVendita
+                .Include(v => v.Vendite)
+                .Include(v => v.Prodotti)
+                .Include(v => v.FK_idVendita)
+                .Where(v => v.Vendite.DataVendita == DataVendita)
+                .Select(v => new { v.Prodotti.NomeProdotto, v.Vendite.DataVendita, v.FK_idVendita })
+                .ToListAsync();
+
+            return Json(search, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ProdottiPerCodFiscale(string codFiscale)
+        {
+            var search = await db.DettagliVendita
+                .Include(d => d.Vendite)
+                .Include(d => d.Vendite.Utenti)
+                .Include(d => d.Prodotti)
+                .Where(d => d.Vendite.Utenti.CodFiscale == codFiscale)
+                .Select(d => new { d.Prodotti.NomeProdotto })
+                .ToListAsync();
+
+            return Json(search, JsonRequestBehavior.AllowGet);
         }
     }
 }

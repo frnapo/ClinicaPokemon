@@ -33,8 +33,18 @@
                     <li>@Html.ActionLink("Ricerca", "FindYourPokemon", "Animali", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
                     @if (User.IsInRole("Utente") || User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Anagrafa", "CreateForUser", "Animali", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
                         <li>@Html.ActionLink("Acquista", "Index", "Prodotti", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
+
+                    @if (User.IsInRole("Utente"))
+                    {
+                        <li>@Html.ActionLink("Anagrafa", "CreateForUser", "Animali", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Vendite", "Index", "DettagliVendita", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
+
                     }
                     @if (User.IsInRole("Veterinario") || User.IsInRole("Admin"))
                     {
@@ -44,7 +54,7 @@
                     {
                         <li>@Html.ActionLink("Farmacia", "Index", "Armadietti", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
                     }
-                    @if  (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Utenti", "Index", "Utentis", new { area = "" }, new { @class = "fs-6 nav-link rounded-pill p-0 px-3 py-1 border border-1 border-white me-2 my-2 my-lg-0" })</li>
                     }
@@ -76,6 +86,7 @@
     @RenderSection("scripts", required: false)
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         AOS.init();
     </script>

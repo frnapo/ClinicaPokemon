@@ -4,45 +4,48 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h3 class="fw-bold text-center">Sei sicuro di volerlo eliminare?</h3>
+            <div class="card bg-white bg-opacity-50">
+                <div class="card-body">
+                    <h4 class="card-title">Dettagli vendita</h4>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Prodotti.NomeProdotto)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Prodotti.NomeProdotto)
+                        </dd>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>DettagliVendita</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Prodotti.NomeProdotto)
-        </dt>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Vendite.idVendita)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Vendite.idVendita)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Prodotti.NomeProdotto)
-        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Quantita)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Quantita)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vendite.idVendita)
-        </dt>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+        <div class="form-group text-center mt-3">
+            @Html.ActionLink("Annulla", "Index", null, new { @class = "btn btn-dark" })
+            <input type="submit" value="Elimina" class="btn btn-danger" />
 
-        <dd>
-            @Html.DisplayFor(model => model.Vendite.idVendita)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantita)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantita)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
         </div>
-    }
+            }
+        </div>
+    </div>
 </div>

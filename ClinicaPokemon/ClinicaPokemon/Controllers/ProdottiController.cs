@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ClinicaPokemon.Controllers
@@ -183,6 +184,36 @@ namespace ClinicaPokemon.Controllers
 
             }
             return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "Dottore, Admin")]
+        public async Task<ActionResult> ShowLocation(int id)
+        {
+            var prodotto = await db.Prodotti.FindAsync(id);
+            if (prodotto == null)
+            {
+                return Json(new { success = false, message = "Prodotto non trovato" }, JsonRequestBehavior.AllowGet);
+            }
+
+            var cassetto = await db.Cassetti.FindAsync(prodotto.FK_idCassetto);
+            if (cassetto == null)
+            {
+                return Json(new { success = false, message = "Cassetto non trovato" }, JsonRequestBehavior.AllowGet);
+            }
+
+            var armadietto = await db.Armadietti.FindAsync(cassetto.FK_idArmadietto);
+            if (armadietto == null)
+            {
+                return Json(new { success = false, message = "Armadietto non trovato" }, JsonRequestBehavior.AllowGet);
+            }
+
+            var location = new
+            {
+                Armadietto = armadietto.NumeroArmadietto,
+                Cassetto = cassetto.NumeroCassetto
+            };
+
+            return Json(new { success = true, location = location }, JsonRequestBehavior.AllowGet);
         }
     }
 }
